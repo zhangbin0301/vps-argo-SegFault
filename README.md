@@ -1,8 +1,9 @@
-# vps-xray-哪吒-Argo一键nodejs脚本
+# vps-Argo一键脚本
 
-ubuntu\debian系统测试可用,alpine系统不支持(没有测试条件)。
+隧道专用版，支持临时隧道订阅，固定隧道订阅
 
-脚本功能包括nezha，argo，xray,bbr加速,wireguard解锁解锁 Netflix 限制，启动 IPv4或IPv6等
+支持临时启动模式，支持开机启动模式
+
 ```
 bash <(wget -qO- https://raw.githubusercontent.com/dsadsadsss/vps-argo/main/install.sh)
 ```
@@ -10,23 +11,7 @@ bash <(wget -qO- https://raw.githubusercontent.com/dsadsadsss/vps-argo/main/inst
 ```
 bash <(curl -sL https://raw.githubusercontent.com/dsadsadsss/vps-argo/main/install.sh)
 ```
-域名后面输入/list 查看节点
 
-域名后面输入/stas 查看pm2管理和进程
-
-域名后面输入/info 查看系统信息
-
-域名后面输入/vls 返回bedrequest说明节点可用
-
-域名后面输入/listen 查看系统监听端口
-
-支持隧道与直连两种方式配置节点，支持临时隧道和订阅地址
-
-隧道设置端口8002或设置的nodejs端口
-
-BBR加速脚本来自：
-
-https://github.com/Chikage0o0/Linux-NetSpeed.git
 
 # 免责声明:
 
