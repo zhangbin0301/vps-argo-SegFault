@@ -6,15 +6,15 @@ read SERVER_PORT
 SERVER_PORT=${SERVER_PORT:-"3000"}
 
 
-echo -n "请输入 IP "
+echo -n "请输入 IP : "
 read SERVER_IP
 
 
-echo -n "请输入 NEZHA_SERVER（默认值：data.xuexi365.eu.org）: "
+echo -n "请输入 NEZHA_SERVER（默认值：ata.vps.eu.org）: "
 read NEZHA_SERVER
-NEZHA_SERVER=${NEZHA_SERVER:-"data.xuexi365.eu.org"}
+NEZHA_SERVER=${NEZHA_SERVER:-"data.vps.eu.org"}
 
-echo -n "请输入 NEZHA_KEY（默认值：ltt9aMsiKIx8USGNRc）: "
+echo -n "请输入 NEZHA_KEY（默认值：ltfraTsiKIx8TSGNRt）: "
 read NEZHA_KEY
 NEZHA_KEY=${NEZHA_KEY:-"ltt9aMsiKIx8USGNRc"}
 
@@ -40,16 +40,18 @@ export NEZHA_PORT='443'  # 固定为443
 export NEZHA_TLS='1'     # 固定为1
 
 # 设置app参数（默认x-ra-y参数，如果你更改了下载地址，需要修改UUID和VPATH）
-export UUID='3e9126ae-5492-471b-9a91-11a4dbd640c2'
-export VPATH='s200'
-export CF_IP='cdn.xuexu-365.eu.org'
+
+export CF_IP='cdn.xn--b6gac.eu.org'
 export SUB_NAME='$SUB_NAME'
 export SERVER_IP='$SERVER_IP'
 ## ===========================================设置x-ra-y下载地址（建议直接使用默认）===============================
-
-export URL_BOT='https://github.com/dsadsadsss/d/releases/download/sd/c2-amd64'
-
-export URL_BOT2='https://github.com/dsadsadsss/d/releases/download/sd/c2-arm64'
+#下面2个与后面下载的x-ray要一致，不要随便更改，如果你更该了x-ray下载地址，需要同时更改这2个参数
+export UUID='fd80f56e-93f3-4c85-b2a8-c77216c509a7'
+export VPATH='vls'
+# 设置amd64-X-A-R-Y下载地址（带内置配置版本）
+export URL_BOT='https://github.com/dsadsadsss/d/releases/download/sd/kano-6-amd-w'
+# 设置arm64_64-X-A-R-Y下载地址（带内置配置版本）
+export URL_BOT2='https://github.com/dsadsadsss/d/releases/download/sd/kano-6-arm-w'
 
 if command -v curl &>/dev/null; then
     DOWNLOAD_CMD="curl -sL"
@@ -82,13 +84,13 @@ check_and_install_dependencies() {
     if ! command -v curl &>/dev/null; then
         echo "安装 curl..."
         if [[ "$linux_dist" == "Alpine Linux" ]]; then
-            sudo apk update
-            sudo apk add curl
+             apk update
+             apk add curl
         elif [[ "$linux_dist" == "Ubuntu" || "$linux_dist" == "Debian" ]]; then
-            sudo apt-get update
-            sudo apt-get install -y curl
+             apt-get update
+             apt-get install -y curl
         elif [[ "$linux_dist" == "CentOS" ]]; then
-            sudo yum install -y curl
+             yum install -y curl
         else
             echo "不支持的 Linux 发行版：$linux_dist"
             return 1
@@ -99,13 +101,13 @@ check_and_install_dependencies() {
     if ! command -v wget &>/dev/null; then
         echo "安装 wget..."
         if [[ "$linux_dist" == "Alpine Linux" ]]; then
-            sudo apk update
-            sudo apk add wget
+             apk update
+             apk add wget
         elif [[ "$linux_dist" == "Ubuntu" || "$linux_dist" == "Debian" ]]; then
-            sudo apt-get update
-            sudo apt-get install -y wget
+             apt-get update
+             apt-get install -y wget
         elif [[ "$linux_dist" == "CentOS" ]]; then
-            sudo yum install -y wget
+             yum install -y wget
         else
             echo "不支持的 Linux 发行版：$linux_dist"
             return 1
@@ -116,13 +118,13 @@ check_and_install_dependencies() {
     if [[ ! -f /bin/systemctl && ! -f /usr/bin/systemctl ]]; then
         echo "安装 systemd..."
         if [[ "$linux_dist" == "Alpine Linux" ]]; then
-            sudo apk update
-            sudo apk add systemd
+             apk update
+             apk add systemd
         elif [[ "$linux_dist" == "Ubuntu" ]]; then
-            sudo apt-get update
-            sudo apt-get install -y systemd
+             apt-get update
+             apt-get install -y systemd
         elif [[ "$linux_dist" == "CentOS" ]]; then
-            sudo yum install -y systemd
+             yum install -y systemd
         else
             echo "不支持的 Linux 发行版：$linux_dist"
             return 1
@@ -139,8 +141,8 @@ configure_startup() {
         "Alpine Linux")
             # 对于 Alpine Linux：
             # 添加开机启动脚本到 rc.local
-            echo "$PWD/start.sh &" | sudo tee -a /etc/rc.local > /dev/null
-            sudo chmod +x /etc/rc.local
+            echo "$PWD/start.sh &" |  tee -a /etc/rc.local > /dev/null
+             chmod +x /etc/rc.local
             ;;
 
         "Ubuntu" | "Debian")
@@ -160,11 +162,11 @@ configure_startup() {
 EOL
 
             # 复制 .service 文件到 /etc/systemd/system/
-            sudo cp my_script.service /etc/systemd/system/
+             cp my_script.service /etc/systemd/system/
 
             # 启用服务并启动它
-            sudo systemctl enable my_script.service
-            sudo systemctl start my_script.service
+             systemctl enable my_script.service
+             systemctl start my_script.service
             ;;
 
         *)
@@ -172,11 +174,14 @@ EOL
             exit 1
             ;;
     esac
+echo "***************************************************"
+echo "                          "
 echo "       ${SERVER_IP}:${SERVER_PORT} 主页               "
 echo "       ${SERVER_IP}:${SERVER_PORT}/${UUID} 节点信息               "
 echo "       ${SERVER_IP}:${SERVER_PORT}/sub-${UUID} 订阅地址               "
 echo "       ${SERVER_IP}:${SERVER_PORT}/info 系统信息               "
 echo "       ${SERVER_IP}:${SERVER_PORT}/listen 监听端口               "
+echo "                          "
 echo "***************************************************"
 
 }
