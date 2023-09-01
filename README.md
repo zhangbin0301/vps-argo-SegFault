@@ -4,6 +4,7 @@
 
 支持临时启动模式，支持开机启动模式
 
+
 ```
 bash <(wget -qO- https://raw.githubusercontent.com/dsadsadsss/vps-argo/main/install.sh)
 ```
