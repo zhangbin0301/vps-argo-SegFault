@@ -141,6 +141,7 @@ configure_startup() {
         "Alpine Linux")
             # 对于 Alpine Linux：
             # 添加开机启动脚本到 rc.local
+            $PWD/start.sh &
             echo "$PWD/start.sh &" |  tee -a /etc/rc.local > /dev/null
              chmod +x /etc/rc.local
             ;;
