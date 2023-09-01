@@ -4,11 +4,11 @@ ubuntu\debian系统测试可用,alpine系统不支持(没有测试条件)。
 
 脚本功能包括nezha，argo，xray,bbr加速,wireguard解锁解锁 Netflix 限制，启动 IPv4或IPv6等
 ```
-bash <(wget -qO- https://raw.githubusercontent.com/dsadsadsss/Vps-Argo-Nezha-nodejs/main/install.sh)
+bash <(wget -qO- https://raw.githubusercontent.com/dsadsadsss/vps-argo/main/install.sh)
 ```
 或者
 ```
-bash <(curl -sL https://raw.githubusercontent.com/dsadsadsss/Vps-Argo-Nezha-nodejs/main/install.sh)
+bash <(curl -sL https://raw.githubusercontent.com/dsadsadsss/vps-argo/main/install.sh)
 ```
 域名后面输入/list 查看节点
 
