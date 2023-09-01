@@ -194,8 +194,8 @@ check_and_install_dependencies || exit 1
 
 # 输出菜单，让用户选择是否直接启动或添加到开机启动再启动
 echo "请选择操作："
-echo "1. 临时启动（重启后不会启动）"
-echo "2. 开机启动（重启后自动运行）"
+echo "1. 临时启动"
+echo "2. 开机启动"
 read choice
 
 case $choice in
