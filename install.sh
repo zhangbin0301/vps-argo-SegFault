@@ -6,7 +6,7 @@ read SERVER_PORT
 SERVER_PORT=${SERVER_PORT:-"3000"}
 
 
-echo -n "请输入 IP : "
+echo -n "请输入IP地址或VPS域名 : "
 read SERVER_IP
 
 
