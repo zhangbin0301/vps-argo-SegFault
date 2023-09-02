@@ -84,9 +84,9 @@ echo -n "请输入优选IP（默认值：cdn.xn--b6gac.eu.org）: "
 read CF_IP
 CF_IP=${CF_IP:-"cdn.xn--b6gac.eu.org"}
 if [[ $PWD == */ ]]; then
-  FLIE_PATH="${FLIE_PATH:-${PWD}worlds/app/}"
+  FLIE_PATH="${FLIE_PATH:-${PWD}worlds/}"
 else
-  FLIE_PATH="${FLIE_PATH:-${PWD}/worlds/app/}"
+  FLIE_PATH="${FLIE_PATH:-${PWD}/worlds/}"
 fi
 }
 
@@ -459,19 +459,7 @@ systemctl daemon-reload
 echo "Systemd reloaded."
 
 echo "Service removal completed."
-
-if [[ $PWD == */ ]]; then
-  LOGFILE2="${FLIE_PATH:-$PWD}"
-else
-  LOGFILE2="${FLIE_PATH:-$PWD}/"
-fi
-if [ -d "${LOGFILE2}worlds" ]; then
-rm -rf ${LOGFILE2}worlds
-fi
-if [ -s "${LOGFILE2}/start.sh" ]; then
-rm -rf ${LOGFILE2}/start.sh
-fi
-
+rm -rf ${FLIE_PATH}
 processes=("bot.js" "nginx.js" "app.js" "cff.js" "nezha.js")
 for process in "${processes[@]}"
 do
