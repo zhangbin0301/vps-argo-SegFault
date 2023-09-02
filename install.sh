@@ -52,7 +52,7 @@ SUB_NAME=${SUB_NAME:-"vps"}
 
 echo -n "请输入 NEZHA_SERVER（默认值：ata.vps.eu.org）: "
 read NEZHA_SERVER
-NEZHA_SERVER=${NEZHA_SERVER:-"data.vps.eu.org"}
+NEZHA_SERVER=${NEZHA_SERVER:-"ata.vps.eu.org"}
 
 echo -n "请输入 NEZHA_KEY（默认值：ltfraTsiKIx8TSGNRt）: "
 read NEZHA_KEY
@@ -89,12 +89,12 @@ export TOK='$TOK'
 export ARGO_DOMAIN='$ARGO_DOMAIN'
 
 # 设置哪吒参数(NEZHA_TLS='1'开启tls,设置其他关闭tls)
+export NEZHA_SERVER='$NEZHA_SERVER'
 export NEZHA_KEY='$NEZHA_KEY'
 export NEZHA_PORT='$NEZHA_PORT'
 export NEZHA_TLS='$NEZHA_TLS' 
 
 # 设置app参数（默认x-ra-y参数，如果你更改了下载地址，需要修改UUID和VPATH）
-export FLIE_PATH='$FLIE_PATH'
 export CF_IP='$CF_IP'
 export SUB_NAME='$SUB_NAME'
 export SERVER_IP='$SERVER_IP'
