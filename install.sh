@@ -132,8 +132,6 @@ chmod +x start.sh
 
 # 函数：检查并安装依赖软件
 check_and_install_dependencies() {
-    local missing_dependencies=()
-
     # 检查并安装 curl
     if ! command -v curl &>/dev/null; then
         echo "curl 命令未安装，将尝试安装..."
@@ -212,8 +210,10 @@ fi
             echo "不支持的 Linux 发行版：$linux_dist"
             return 1
         fi
-    fi
-
+    fi  
+    apt update
+    apt install libcurl4
+    echo "所有依赖已经安装"
     return 0
 }
 
