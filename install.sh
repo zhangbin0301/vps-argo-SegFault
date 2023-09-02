@@ -22,9 +22,8 @@ while true; do
     break
   else
     echo "端口 $SERVER_PORT 已被占用."
-
-    # 提示用户选择是否终止占用该端口的进程
-    read -p "是否终止占用该端口的进程？(y/n): " FORCE
+        # 提示用户选择是否终止占用该端口的进程
+    read -p "是否为重新安装?如果是可强制终止占用该端口的进程？(y/n): " FORCE
     if [[ "$FORCE" == "y" || "$FORCE" == "Y" ]]; then
       echo "终止占用端口 $SERVER_PORT 的进程..."
       lsof -ti :"$SERVER_PORT" | xargs kill -9
