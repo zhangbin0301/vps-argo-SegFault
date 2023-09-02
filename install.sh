@@ -304,11 +304,13 @@ else
   fi
 fi
 [ -s $LOGFILE ] && ARGO_DOMAIN=$(cat $LOGFILE | grep -o "info.*https://.*trycloudflare.com" | sed "s@.*https://@@g" | tail -n 1)
+  if [[ -n "${ARGO_DOMAIN}" ]]; then
 echo "                         "
 echo "       vless节点信息                   "
 echo "vless://${UUID}@${CF_IP}:443?host=${ARGO_DOMAIN}&path=%2F${VPATH}%3Fed%3D2048&type=ws&encryption=none&security=tls&sni=${ARGO_DOMAIN}#Vless-${SUB_NAME}"
 echo "***************************************************"
 echo "                         "
+fi
 }
 
 # 获取Linux发行版名称，并赋值给$linux_dist变量
@@ -385,11 +387,13 @@ else
   fi
 fi
 [ -s $LOGFILE ] && ARGO_DOMAIN=$(cat $LOGFILE | grep -o "info.*https://.*trycloudflare.com" | sed "s@.*https://@@g" | tail -n 1)
+if [[ -n "${ARGO_DOMAIN}" ]]; then
 echo "                         "
 echo "       vless节点信息                   "
 echo "vless://${UUID}@${CF_IP}:443?host=${ARGO_DOMAIN}&path=%2F${VPATH}%3Fed%3D2048&type=ws&encryption=none&security=tls&sni=${ARGO_DOMAIN}#Vless-${SUB_NAME}"
 echo "***************************************************"
 echo "                         "
+fi
         ;;
     2)
         # 添加到开机启动再启动
