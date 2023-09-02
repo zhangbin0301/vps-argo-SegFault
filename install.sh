@@ -1,10 +1,6 @@
 #!/bin/bash
 # 设置与x-r-ay配套的参数
-export UUID='fd80f56e-93f3-4c85-b2a8-c77216c509a7'
-export VPATH='vls'
-# 设置固定隧道参数
-# export TOK='xxxxx'
-# export ARGO_DOMAIN='xxxxx'
+
 # 提示用户输入变量值，如果没有输入则使用默认值
 while true; do
   echo -n "请输入端口（默认值：3000）: "
@@ -33,14 +29,18 @@ echo -n "请输入 NEZHA_KEY（默认值：ltfraTsiKIx8TSGNRt）: "
 read NEZHA_KEY
 NEZHA_KEY=${NEZHA_KEY:-"ltt9aMsiKIx8USGNRc"}
 
+echo -n "请输入 NEZHA_PORT（默认值：443）: "
+read NEZHA_PORT
+NEZHA_PORT=${NEZHA_PORT:-"443"}
+
+echo -n "请输入 是否开启tls（开启1，关闭0,默认值：1）: "
+read NEZHA_TLS
+NEZHA_TLS=${NEZHA_TLS:-"1"}
+
 echo -n "请输入 节点名称（默认值：vps）: "
 read SUB_NAME
 SUB_NAME=${SUB_NAME:-"vps"}
 
-# 设置其他参数
-export CF_IP='cdn.xn--b6gac.eu.org'
-export NEZHA_PORT='443'  # 固定为443
-export NEZHA_TLS='1'     # 固定为1
 # 创建 start.sh 脚本并写入你的代码
 cat <<EOL > start.sh
 #!/bin/bash
