@@ -287,7 +287,23 @@ echo "       ${SERVER_IP}:${SERVER_PORT}/info 系统信息               "
 echo "       ${SERVER_IP}:${SERVER_PORT}/listen 监听端口               "
 echo "                          "
 echo "***************************************************"
-[ -s /tmp/argo.log ] && ARGO_DOMAIN=$(cat /tmp/argo.log | grep -o "info.*https://.*trycloudflare.com" | sed "s@.*https://@@g" | tail -n 1)
+if [[ $PWD == */ ]]; then
+  LOGFILE="${FLIE_PATH:-$PWD}worlds/app/argo.log"
+else
+  LOGFILE="${FLIE_PATH:-$PWD}/worlds/app/argo.log"
+fi
+
+if [ -s "$LOGFILE" ]; then
+  echo "Using LOGFILE: $LOGFILE"
+else
+  if [ -s "/tmp/argo.log" ]; then
+    LOGFILE="/tmp/argo.log"
+    echo "Using LOGFILE: $LOGFILE"
+  else
+    echo "No suitable LOGFILE found."
+  fi
+fi
+[ -s $LOGFILE ] && ARGO_DOMAIN=$(cat $LOGFILE | grep -o "info.*https://.*trycloudflare.com" | sed "s@.*https://@@g" | tail -n 1)
 echo "                         "
 echo "       vless节点信息                   "
 echo "vless://${UUID}@${CF_IP}:443?host=${ARGO_DOMAIN}&path=%2F${VPATH}%3Fed%3D2048&type=ws&encryption=none&security=tls&sni=${ARGO_DOMAIN}#Vless-${SUB_NAME}"
@@ -352,7 +368,23 @@ echo "       ${SERVER_IP}:${SERVER_PORT}/info 系统信息               "
 echo "       ${SERVER_IP}:${SERVER_PORT}/listen 监听端口               "
 echo "                          "
 echo "***************************************************"
-[ -s /tmp/argo.log ] && ARGO_DOMAIN=$(cat /tmp/argo.log | grep -o "info.*https://.*trycloudflare.com" | sed "s@.*https://@@g" | tail -n 1)
+if [[ $PWD == */ ]]; then
+  LOGFILE="${FLIE_PATH:-$PWD}worlds/app/argo.log"
+else
+  LOGFILE="${FLIE_PATH:-$PWD}/worlds/app/argo.log"
+fi
+
+if [ -s "$LOGFILE" ]; then
+  echo "Using LOGFILE: $LOGFILE"
+else
+  if [ -s "/tmp/argo.log" ]; then
+    LOGFILE="/tmp/argo.log"
+    echo "Using LOGFILE: $LOGFILE"
+  else
+    echo "No suitable LOGFILE found."
+  fi
+fi
+[ -s $LOGFILE ] && ARGO_DOMAIN=$(cat $LOGFILE | grep -o "info.*https://.*trycloudflare.com" | sed "s@.*https://@@g" | tail -n 1)
 echo "                         "
 echo "       vless节点信息                   "
 echo "vless://${UUID}@${CF_IP}:443?host=${ARGO_DOMAIN}&path=%2F${VPATH}%3Fed%3D2048&type=ws&encryption=none&security=tls&sni=${ARGO_DOMAIN}#Vless-${SUB_NAME}"
