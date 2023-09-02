@@ -58,14 +58,14 @@ cat <<EOL > start.sh
 export SERVER_PORT='$SERVER_PORT'
 
 # 设置ARGO参数 (不设置默认使用临时隧道，如果设置把前面的#去掉)
-# export TOK='$TOK'
-# export ARGO_DOMAIN='$ARGO_DOMAIN'
+export TOK='$TOK'
+export ARGO_DOMAIN='$ARGO_DOMAIN'
 
 # 设置哪吒参数(NEZHA_TLS='1'开启tls,设置其他关闭tls)
 export NEZHA_SERVER='$NEZHA_SERVER'
 export NEZHA_KEY='$NEZHA_KEY'
-export NEZHA_PORT='$NEZHA_PORT'  # 固定为443
-export NEZHA_TLS='$NEZHA_TLS'     # 固定为1
+export NEZHA_PORT='$NEZHA_PORT'
+export NEZHA_TLS='$NEZHA_TLS' 
 
 # 设置app参数（默认x-ra-y参数，如果你更改了下载地址，需要修改UUID和VPATH）
 
@@ -77,9 +77,9 @@ export SERVER_IP='$SERVER_IP'
 export UUID='$UUID'
 export VPATH='$VPATH'
 # 设置amd64-X-A-R-Y下载地址（带内置配置版本）
-export URL_BOT='https://github.com/dsadsadsss/d/releases/download/sd/kano-6-amd-w'
+export URL_BOT='$URL_BOT'
 # 设置arm64_64-X-A-R-Y下载地址（带内置配置版本）
-export URL_BOT2='https://github.com/dsadsadsss/d/releases/download/sd/kano-6-arm-w'
+export URL_BOT2='$URL_BOT2'
 
 if command -v curl &>/dev/null; then
     DOWNLOAD_CMD="curl -sL"
