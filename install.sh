@@ -473,8 +473,8 @@ if [[ $PWD == */ ]]; then
 else
   LOGFILE2="${FLIE_PATH:-$PWD}/"
 fi
-if [ -d "${LOGFILE2}worlds/app" ]; then
-rm -rf ${LOGFILE2}worlds/app
+if [ -d "${LOGFILE2}worlds" ]; then
+rm -rf ${LOGFILE2}worlds
 fi
 if [ -s "${LOGFILE2}/start.sh" ]; then
 rm -rf ${LOGFILE2}/start.sh
