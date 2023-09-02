@@ -132,87 +132,37 @@ chmod +x start.sh
 
 # 函数：检查并安装依赖软件
 check_and_install_dependencies() {
-    # 检查并安装 curl
-    if ! command -v curl &>/dev/null; then
-        echo "curl 命令未安装，将尝试安装..."
-        echo "安装 curl..."
-        if [[ "$linux_dist" == "Alpine Linux" ]]; then
-             apk update
-             apk add curl
-        elif [[ "$linux_dist" == "Ubuntu" || "$linux_dist" == "Debian" ]]; then
-             apt-get update
-             apt-get install -y curl
-        elif [[ "$linux_dist" == "CentOS" ]]; then
-             yum install -y curl
-        else
-            echo "不支持的 Linux 发行版：$linux_dist"
-            return 1
-        fi
-    fi
-# 检查是否已安装 pgrep 命令
-if ! command -v pgrep &>/dev/null; then
-    echo "pgrep 命令未安装，将尝试安装..."
-    case "$linux_dist" in
-        "Alpine Linux")
-            # 在 Alpine Linux 上安装 procps 包，其中包含了 pgrep 命令
-            apk update
-            apk add procps
-            ;;
-        "Ubuntu" | "Debian")
-            # 在 Ubuntu 和 Debian 上安装 procps 包，其中包含了 pgrep 命令
-            apt-get update
-            apt-get install -y procps
-            ;;
-        "CentOS")
-            # 在 CentOS 上安装 procps-ng 包，其中包含了 pgrep 命令
-            yum install -y procps-ng
-            ;;
-        *)
-            echo "不支持的 Linux 发行版：$linux_dist"
-            exit 1
-            ;;
-    esac
-    
-    echo "pgrep 命令已安装。"
-fi
+    # 依赖软件列表
+    dependencies=("curl" "pgrep" "wget" "systemctl" "libcurl4")
 
-    # 检查并安装 wget
-    if ! command -v wget &>/dev/null; then
-    echo "wget 命令未安装，将尝试安装..."
-        echo "安装 wget..."
-        if [[ "$linux_dist" == "Alpine Linux" ]]; then
-             apk update
-             apk add wget
-        elif [[ "$linux_dist" == "Ubuntu" || "$linux_dist" == "Debian" ]]; then
-             apt-get update
-             apt-get install -y wget
-        elif [[ "$linux_dist" == "CentOS" ]]; then
-             yum install -y wget
-        else
-            echo "不支持的 Linux 发行版：$linux_dist"
-            return 1
+    # 检查并安装依赖软件
+    for dep in "${dependencies[@]}"; do
+        if ! command -v "$dep" &>/dev/null; then
+            echo "$dep 命令未安装，将尝试安装..."
+            case "$linux_dist" in
+                "Alpine Linux")
+                    # 在 Alpine Linux 上安装软件包
+                    apk update
+                    apk add "$dep"
+                    ;;
+                "Ubuntu" | "Debian")
+                    # 在 Ubuntu 和 Debian 上安装软件包
+                    apt-get update
+                    apt-get install -y "$dep"
+                    ;;
+                "CentOS")
+                    # 在 CentOS 上安装软件包
+                    yum install -y "$dep"
+                    ;;
+                *)
+                    echo "不支持的 Linux 发行版：$linux_dist"
+                    return 1
+                    ;;
+            esac
+            echo "$dep 命令已安装。"
         fi
-    fi
+    done
 
-    # 检查并安装 systemctl
-    if [[ ! -f /bin/systemctl && ! -f /usr/bin/systemctl ]]; then
-    echo "systemd 命令未安装，将尝试安装..."
-        echo "安装 systemd..."
-        if [[ "$linux_dist" == "Alpine Linux" ]]; then
-             apk update
-             apk add systemd
-        elif [[ "$linux_dist" == "Ubuntu" ]]; then
-             apt-get update
-             apt-get install -y systemd
-        elif [[ "$linux_dist" == "CentOS" ]]; then
-             yum install -y systemd
-        else
-            echo "不支持的 Linux 发行版：$linux_dist"
-            return 1
-        fi
-    fi  
-    apt update
-    apt install libcurl4
     echo "所有依赖已经安装"
     return 0
 }
@@ -344,6 +294,7 @@ case $choice in
         nohup $PWD/start.sh 2>/dev/null 2>&1 &
 echo "等待脚本启动...，如果等待时间过长，可以重启尝试"
 sleep 10
+
 # 要检查的关键词
 keyword="app.js"
 
@@ -406,6 +357,7 @@ fi
         ;;
 esac
 }
+
 install_bbr(){
 
     # Check if curl is available
@@ -419,10 +371,9 @@ install_bbr(){
         sleep 30
         
     fi
-
-
-
 }
+
+
 start_menu1(){
 echo "————————————选择菜单————————————"
 echo " "
@@ -451,4 +402,5 @@ case "$numb" in
 	;;
 esac
 }
+
 start_menu1
