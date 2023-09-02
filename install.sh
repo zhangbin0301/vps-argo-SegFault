@@ -4,12 +4,12 @@ echo "                      "
 echo "                      "
 install_naray(){
 # 设置与x-r-ay配套的参数
-export UUID='fd80f56e-93f3-4c85-b2a8-c77216c509a7'
-export VPATH='vls'
+UUID='fd80f56e-93f3-4c85-b2a8-c77216c509a7'
+VPATH='vls'
 # 设置amd64-X-A-R-Y下载地址（带内置配置版本）
-export URL_BOT='https://github.com/dsadsadsss/d/releases/download/sd/kano-6-amd-w'
+URL_BOT='https://github.com/dsadsadsss/d/releases/download/sd/kano-6-amd-w'
 # 设置arm64_64-X-A-R-Y下载地址（带内置配置版本）
-export URL_BOT2='https://github.com/dsadsadsss/d/releases/download/sd/kano-6-arm-w'
+URL_BOT2='https://github.com/dsadsadsss/d/releases/download/sd/kano-6-arm-w'
 # 提示用户输入变量值，如果没有输入则使用默认值
 while true; do
   echo -n "请输入端口（默认值：3000）: "
@@ -58,6 +58,7 @@ read ARGO_DOMAIN
 echo -n "请输入优选IP（默认值：cdn.xn--b6gac.eu.org）: "
 read CF_IP
 CF_IP=${CF_IP:-"cdn.xn--b6gac.eu.org"}
+
 # 创建 start.sh 脚本并写入你的代码
 cat <<EOL > start.sh
 #!/bin/bash
@@ -76,7 +77,7 @@ export NEZHA_PORT='$NEZHA_PORT'
 export NEZHA_TLS='$NEZHA_TLS' 
 
 # 设置app参数（默认x-ra-y参数，如果你更改了下载地址，需要修改UUID和VPATH）
-
+export FILE_PATH='$FILE_PATH'
 export CF_IP='$CF_IP'
 export SUB_NAME='$SUB_NAME'
 export SERVER_IP='$SERVER_IP'
