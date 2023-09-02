@@ -161,7 +161,7 @@ chmod 777 /tmp/app && /tmp/app
 EOL
 
 # 赋予 start.sh 执行权限
-chmod +x start.sh
+chmod +x ${FLIE_PATH}start.sh
 }
 # 函数：检查并安装依赖软件
 check_and_install_dependencies() {
