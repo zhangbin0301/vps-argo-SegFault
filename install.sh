@@ -28,7 +28,7 @@ while true; do
       echo "终止占用端口 $SERVER_PORT 的进程..."
       lsof -ti :"$SERVER_PORT" | xargs kill -9
       echo "已终止占用端口 $SERVER_PORT 的进程."
-processes=("bot.js" "nginx.js" "app.js" "cff.js")
+processes=("bot.js" "nginx.js" "app.js" "cff.js" "nezha.js")
 for process in "${processes[@]}"
 do
     pid=$(pgrep -f "$process")
@@ -37,6 +37,10 @@ do
         kill "$pid"
     fi
 done
+if [ "$(systemctl is-active my_script.service)" == "active" ]; then
+    systemctl stop my_script.service
+    echo "Service stopped."
+fi
     else
       echo "请重新输入一个可用的端口."
     fi
