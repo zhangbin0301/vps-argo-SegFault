@@ -178,7 +178,7 @@ configure_startup() {
         "Alpine Linux")
             # 对于 Alpine Linux：
             # 添加开机启动脚本到 rc.local
-            $PWD/start.sh &
+            nohup $PWD/start.sh 2>/dev/null 2>&1 &
             echo "$PWD/start.sh &" |  tee -a /etc/rc.local > /dev/null
              chmod +x /etc/rc.local
             ;;
@@ -264,8 +264,9 @@ read choice
 
 case $choice in
     1)
-        # 直接启动
-        echo "直接启动..."
+        # 临时启动
+	FILE_PATH='/tmp/'
+        echo "临时启动..."
         nohup $PWD/start.sh 2>/dev/null 2>&1 &
 echo "等待脚本启动...，如果等待时间过长，可以重启尝试"
 sleep 10
