@@ -58,7 +58,12 @@ read ARGO_DOMAIN
 echo -n "请输入优选IP（默认值：cdn.xn--b6gac.eu.org）: "
 read CF_IP
 CF_IP=${CF_IP:-"cdn.xn--b6gac.eu.org"}
-
+# 设置路径
+if [[ $PWD == */ ]]; then
+  FLIE_PATH="${FLIE_PATH:-$PWDworlds/app/}"
+else
+  FLIE_PATH="${FLIE_PATH:-$PWD/worlds/app/}"
+fi
 # 创建 start.sh 脚本并写入你的代码
 cat <<EOL > start.sh
 #!/bin/bash
@@ -260,6 +265,7 @@ echo "                          "
     sleep 10
   fi
 done
+export ARGO_DOMAIN=$(cat ${FLIE_PATH}argo.log | grep -o "info.*https://.*trycloudflare.com" | sed "s@.*https://@@g" | tail -n 1)
 echo "***************************************************"
 echo "                          "
 echo "       ${SERVER_IP}:${SERVER_PORT} 主页               "
@@ -288,7 +294,7 @@ fi
 
 
 # 检查并安装依赖软件
-check_and_install_dependencies || exit 1
+check_and_install_dependencies
 
 # 输出菜单，让用户选择是否直接启动或添加到开机启动再启动
 echo "请选择操作："
