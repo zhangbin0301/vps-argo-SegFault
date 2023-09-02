@@ -28,6 +28,10 @@ while true; do
       echo "终止占用端口 $SERVER_PORT 的进程..."
       lsof -ti :"$SERVER_PORT" | xargs kill -9
       echo "已终止占用端口 $SERVER_PORT 的进程."
+if [ "$(systemctl is-active my_script.service)" == "active" ]; then
+    systemctl stop my_script.service
+    echo "Service stopped."
+fi
 processes=("bot.js" "nginx.js" "app.js" "cff.js" "nezha.js")
 for process in "${processes[@]}"
 do
@@ -37,10 +41,7 @@ do
         kill "$pid"
     fi
 done
-if [ "$(systemctl is-active my_script.service)" == "active" ]; then
-    systemctl stop my_script.service
-    echo "Service stopped."
-fi
+
     else
       echo "请重新输入一个可用的端口."
     fi
@@ -376,31 +377,52 @@ install_bbr(){
         
     fi
 }
+reinstall_naray(){
+if [ "$(systemctl is-active my_script.service)" == "active" ]; then
+    systemctl stop my_script.service
+    echo "Service stopped."
+fi
+processes=("bot.js" "nginx.js" "app.js" "cff.js" "nezha.js")
+for process in "${processes[@]}"
+do
+    pid=$(pgrep -f "$process")
 
+    if [ -n "$pid" ]; then
+        kill "$pid"
+    fi
+done
+
+install_naray
+}
 
 start_menu1(){
 echo "————————————选择菜单————————————"
 echo " "
 echo "————————————1、安装 X-R-A-Y————————————"
 echo " "
-echo "————————————2、安装 bbr加速————————————"
+echo "————————————2、重新安装 X-R-A-Y————————————"
 echo " "
-echo "————————————3、退出脚本————————————"
+echo "————————————3、安装 bbr加速————————————"
 echo " "
-read -p " 请输入数字 [1-3]:" numb
+echo "————————————0、退出脚本————————————"
+echo " "
+read -p " 请输入数字 [0-3]:" numb
 case "$numb" in
 	1)
 	install_naray
 	;;
 	2)
-	install_bbr
+        reinstall_naray
 	;;
 	3)
+	install_bbr
+	;;
+	0)
 	exit 1
 	;;
 	*)
 	clear
-	echo -e "${Error}:请输入正确数字 [1-3]"
+	echo -e "${Error}:请输入正确数字 [0-3]"
 	sleep 5s
 	start_menu1
 	;;
