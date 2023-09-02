@@ -184,6 +184,20 @@ EOL
             exit 1
             ;;
     esac
+echo "等待脚本启动...，如果等待时间过长，可以重启尝试"
+sleep 10
+# 要检查的关键词
+keyword="bot.js"
+
+while true; do
+  # 使用pgrep检查包含关键词的进程是否存在
+  if pgrep -f "$keyword" > /dev/null; then
+    echo "脚本已启动"
+    break
+  else
+    sleep 10
+  fi
+done
 echo "***************************************************"
 echo "                          "
 echo "       ${SERVER_IP}:${SERVER_PORT} 主页               "
@@ -193,12 +207,6 @@ echo "       ${SERVER_IP}:${SERVER_PORT}/info 系统信息               "
 echo "       ${SERVER_IP}:${SERVER_PORT}/listen 监听端口               "
 echo "                          "
 echo "***************************************************"
-
-[ "$RIZHI" = "yes" ] && echo "                         "
-[ "$RIZHI" = "yes" ] && echo "       vless节点信息                   "
-[ "$RIZHI" = "yes" ] && echo "vless://${UUID}@${CF_IP}:443?host=${ARGO_DOMAIN}&path=%2F${VPATH}%3Fed%3D2048&type=ws&encryption=none&security=tls&sni=${ARGO_DOMAIN}#Vless-${SUB_NAME}"
-[ "$RIZHI" = "yes" ] && echo "***************************************************"
-[ "$RIZHI" = "yes" ] && echo "                         "
 
 }
 
@@ -219,6 +227,21 @@ case $choice in
         # 直接启动
         echo "直接启动..."
         $PWD/start.sh &
+        sleep 20
+echo "等待脚本启动...，如果等待时间过长，可以重启尝试"
+sleep 10
+# 要检查的关键词
+keyword="bot.js"
+
+while true; do
+  # 使用pgrep检查包含关键词的进程是否存在
+  if pgrep -f "$keyword" > /dev/null; then
+    echo "脚本已启动"
+    break
+  else
+    sleep 10
+  fi
+done
 echo "***************************************************"
 echo "                          "
 echo "       ${SERVER_IP}:${SERVER_PORT} 主页               "
@@ -228,13 +251,6 @@ echo "       ${SERVER_IP}:${SERVER_PORT}/info 系统信息               "
 echo "       ${SERVER_IP}:${SERVER_PORT}/listen 监听端口               "
 echo "                          "
 echo "***************************************************"
-
-[ "$RIZHI" = "yes" ] && echo "                         "
-[ "$RIZHI" = "yes" ] && echo "       vless节点信息                   "
-[ "$RIZHI" = "yes" ] && echo "vless://${UUID}@${CF_IP}:443?host=${ARGO_DOMAIN}&path=%2F${VPATH}%3Fed%3D2048&type=ws&encryption=none&security=tls&sni=${ARGO_DOMAIN}#Vless-${SUB_NAME}"
-[ "$RIZHI" = "yes" ] && echo "***************************************************"
-[ "$RIZHI" = "yes" ] && echo "                         "
-
         ;;
     2)
         # 添加到开机启动再启动
