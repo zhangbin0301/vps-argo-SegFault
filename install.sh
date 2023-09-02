@@ -35,7 +35,6 @@ do
 
     if [ -n "$pid" ]; then
         kill "$pid"
-        echo "关闭进程重新安装"
     fi
 done
     else
