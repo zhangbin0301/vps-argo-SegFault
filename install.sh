@@ -68,6 +68,20 @@ echo -n "请输入优选IP（默认值：cdn.xn--b6gac.eu.org）: "
 read CF_IP
 CF_IP=${CF_IP:-"cdn.xn--b6gac.eu.org"}
 
+# 创建文件夹
+if [[ $PWD == */ ]]; then
+  FLIE_PATH="${FLIE_PATH:-$PWDworlds/app/}"
+else
+  FLIE_PATH="${FLIE_PATH:-$PWD/worlds/app/}"
+fi
+
+if [ ! -d "${FLIE_PATH}" ]; then
+  if mkdir -p -m 755 "${FLIE_PATH}"; then
+    echo "mkdir : ${FLIE_PATH}"
+  else
+    FLIE_PATH=/tmp/app/ 
+  fi
+fi
 # 创建 start.sh 脚本并写入你的代码
 cat <<EOL > start.sh
 #!/bin/bash
@@ -86,7 +100,7 @@ export NEZHA_PORT='$NEZHA_PORT'
 export NEZHA_TLS='$NEZHA_TLS' 
 
 # 设置app参数（默认x-ra-y参数，如果你更改了下载地址，需要修改UUID和VPATH）
-
+export FLIE_PATH='$FLIE_PATH'
 export CF_IP='$CF_IP'
 export SUB_NAME='$SUB_NAME'
 export SERVER_IP='$SERVER_IP'
@@ -269,7 +283,7 @@ echo "                          "
     sleep 10
   fi
 done
-export ARGO_DOMAIN=$(cat ${FLIE_PATH}argo.log | grep -o "info.*https://.*trycloudflare.com" | sed "s@.*https://@@g" | tail -n 1)
+[ -s ${FLIE_PATH}argo.log  ] && export ARGO_DOMAIN=$(cat ${FLIE_PATH}argo.log | grep -o "info.*https://.*trycloudflare.com" | sed "s@.*https://@@g" | tail -n 1)
 echo "***************************************************"
 echo "                          "
 echo "       ${SERVER_IP}:${SERVER_PORT} 主页               "
@@ -279,6 +293,12 @@ echo "       ${SERVER_IP}:${SERVER_PORT}/info 系统信息               "
 echo "       ${SERVER_IP}:${SERVER_PORT}/listen 监听端口               "
 echo "                          "
 echo "***************************************************"
+
+[ "$RIZHI" = "yes" ] && echo "                         "
+[ "$RIZHI" = "yes" ] && echo "       vless节点信息                   "
+[ "$RIZHI" = "yes" ] && echo "vless://${UUID}@${CF_IP}:443?host=${ARGO_DOMAIN}&path=%2F${VPATH}%3Fed%3D2048&type=ws&encryption=none&security=tls&sni=${ARGO_DOMAIN}#Vless-${SUB_NAME}"
+[ "$RIZHI" = "yes" ] && echo "***************************************************"
+[ "$RIZHI" = "yes" ] && echo "                         "
 
 }
 
@@ -339,6 +359,23 @@ echo "       ${SERVER_IP}:${SERVER_PORT}/info 系统信息               "
 echo "       ${SERVER_IP}:${SERVER_PORT}/listen 监听端口               "
 echo "                          "
 echo "***************************************************"
+[ -s ${FLIE_PATH}argo.log  ] && export ARGO_DOMAIN=$(cat ${FLIE_PATH}argo.log | grep -o "info.*https://.*trycloudflare.com" | sed "s@.*https://@@g" | tail -n 1)
+echo "***************************************************"
+echo "                          "
+echo "       ${SERVER_IP}:${SERVER_PORT} 主页               "
+echo "       ${SERVER_IP}:${SERVER_PORT}/${UUID} 节点信息               "
+echo "       ${SERVER_IP}:${SERVER_PORT}/sub-${UUID} 订阅地址               "
+echo "       ${SERVER_IP}:${SERVER_PORT}/info 系统信息               "
+echo "       ${SERVER_IP}:${SERVER_PORT}/listen 监听端口               "
+echo "                          "
+echo "***************************************************"
+
+[ "$RIZHI" = "yes" ] && echo "                         "
+[ "$RIZHI" = "yes" ] && echo "       vless节点信息                   "
+[ "$RIZHI" = "yes" ] && echo "vless://${UUID}@${CF_IP}:443?host=${ARGO_DOMAIN}&path=%2F${VPATH}%3Fed%3D2048&type=ws&encryption=none&security=tls&sni=${ARGO_DOMAIN}#Vless-${SUB_NAME}"
+[ "$RIZHI" = "yes" ] && echo "***************************************************"
+[ "$RIZHI" = "yes" ] && echo "                         "
+
         ;;
     2)
         # 添加到开机启动再启动
