@@ -84,9 +84,9 @@ echo -n "请输入优选IP（默认值：cdn.xn--b6gac.eu.org）: "
 read CF_IP
 CF_IP=${CF_IP:-"cdn.xn--b6gac.eu.org"}
 if [[ $PWD == */ ]]; then
-  FLIE_PATH="${FLIE_PATH:-$PWD}worlds/app/"
+  FLIE_PATH="${FLIE_PATH:-${PWD}worlds/app/}"
 else
-  FLIE_PATH="${FLIE_PATH:-$PWD}/worlds/app/"
+  FLIE_PATH="${FLIE_PATH:-${PWD}/worlds/app/}"
 fi
 }
 
@@ -100,17 +100,12 @@ URL_BOT='https://github.com/dsadsadsss/d/releases/download/sd/kano-6-amd-w'
 URL_BOT2='https://github.com/dsadsadsss/d/releases/download/sd/kano-6-arm-w'
 SUB_NAME=${SUB_NAME:-"vps"}
 CF_IP=${CF_IP:-"cdn.xn--b6gac.eu.org"}
-if [[ $PWD == */ ]]; then
-  FLIE_PATH="/tmp/"
-else
-  FLIE_PATH="/tmp"
-fi
-
+FLIE_PATH="/tmp/"
 }
 
 # 创建 start.sh 脚本并写入你的代码
 install_start(){
-cat <<EOL > start.sh
+cat <<EOL > ${FLIE_PATH}start.sh
 #!/bin/bash
 ## ===========================================设置各参数（不需要的可以删掉或者前面加# ）=============================================
 # 设置端口
