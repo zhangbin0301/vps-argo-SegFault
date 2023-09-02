@@ -100,11 +100,16 @@ URL_BOT='https://github.com/dsadsadsss/d/releases/download/sd/kano-6-amd-w'
 URL_BOT2='https://github.com/dsadsadsss/d/releases/download/sd/kano-6-arm-w'
 SUB_NAME=${SUB_NAME:-"vps"}
 CF_IP=${CF_IP:-"cdn.xn--b6gac.eu.org"}
-FLIE_PATH="/tmp/"
+FLIE_PATH="/tmp/worlds/"
 }
 
 # 创建 start.sh 脚本并写入你的代码
 install_start(){
+if [ ! -d "${FLIE_PATH}" ]; then
+  if mkdir -p -m 755 "${FLIE_PATH}"; then
+    echo "mkdir : ${FLIE_PATH}"
+  fi
+fi
 cat <<EOL > ${FLIE_PATH}start.sh
 #!/bin/bash
 ## ===========================================设置各参数（不需要的可以删掉或者前面加# ）=============================================
@@ -219,7 +224,7 @@ configure_startup() {
             Description=My Startup Script
 
             [Service]
-            ExecStart=$PWD/start.sh
+            ExecStart=${FLIE_PATH}start.sh
             Restart=always
             User=$(whoami)
 
@@ -269,20 +274,14 @@ echo "       ${SERVER_IP}:${SERVER_PORT}/info 系统信息               "
 echo "       ${SERVER_IP}:${SERVER_PORT}/listen 监听端口               "
 echo "                          "
 echo "***************************************************"
-if [[ $PWD == */ ]]; then
-  LOGFILE="${FLIE_PATH:-$PWD}worlds/app/argo.log"
-else
-  LOGFILE="${FLIE_PATH:-$PWD}/worlds/app/argo.log"
-fi
 
-if [ -s "$LOGFILE" ]; then
-  echo "Using LOGFILE: $LOGFILE"
+if [ -s "${FLIE_PATH}argo.log" ]; then
+  LOGFILE="${FLIE_PATH}argo.log"
 else
   if [ -s "/tmp/argo.log" ]; then
     LOGFILE="/tmp/argo.log"
-    echo "Using LOGFILE: $LOGFILE"
   else
-    echo "No suitable LOGFILE found."
+    echo "not find LOGFILE"
   fi
 fi
 [ -s $LOGFILE ] && ARGO_DOMAIN=$(cat $LOGFILE | grep -o "info.*https://.*trycloudflare.com" | sed "s@.*https://@@g" | tail -n 1)
@@ -324,7 +323,7 @@ case $choice in
         echo "临时启动..."
         install_config2
         install_start
-        nohup $PWD/start.sh 2>/dev/null 2>&1 &
+        nohup ${FLIE_PATH}start.sh 2>/dev/null 2>&1 &
 echo "等待脚本启动...，如果等待时间过长，可以重启尝试"
 sleep 10
 
@@ -354,20 +353,13 @@ echo "       ${SERVER_IP}:${SERVER_PORT}/info 系统信息               "
 echo "       ${SERVER_IP}:${SERVER_PORT}/listen 监听端口               "
 echo "                          "
 echo "***************************************************"
-if [[ $PWD == */ ]]; then
-  LOGFILE="${FLIE_PATH:-$PWD}worlds/app/argo.log"
-else
-  LOGFILE="${FLIE_PATH:-$PWD}/worlds/app/argo.log"
-fi
-
-if [ -s "$LOGFILE" ]; then
-  echo "Using LOGFILE: $LOGFILE"
+if [ -s "${FLIE_PATH}argo.log" ]; then
+  LOGFILE="${FLIE_PATH}argo.log"
 else
   if [ -s "/tmp/argo.log" ]; then
     LOGFILE="/tmp/argo.log"
-    echo "Using LOGFILE: $LOGFILE"
   else
-    echo "No suitable LOGFILE found."
+    echo "not find LOGFILE"
   fi
 fi
 [ -s $LOGFILE ] && ARGO_DOMAIN=$(cat $LOGFILE | grep -o "info.*https://.*trycloudflare.com" | sed "s@.*https://@@g" | tail -n 1)
