@@ -220,8 +220,20 @@ echo "***************************************************"
 
 }
 
-# 获取 Linux 发行版名称
-linux_dist=$(awk -F= '/^NAME/{print $2}' /etc/os-release | tr -d '"')
+# 获取Linux发行版名称，并赋值给$linux_dist变量
+linux_dist=$(cat /etc/os-release | grep -oP '(?<=^NAME\=).*' | tr -d '"')
+
+# 根据不同的发行版名称设置$linux_dist的值
+if [[ $linux_dist == *"Alpine"* ]]; then
+    linux_dist="Alpine Linux"
+elif [[ $linux_dist == *"Ubuntu"* ]]; then
+    linux_dist="Ubuntu"
+elif [[ $linux_dist == *"Debian"* ]]; then
+    linux_dist="Debian"
+elif [[ $linux_dist == *"CentOS"* ]]; then
+    linux_dist="CentOS"
+fi
+
 
 # 检查并安装依赖软件
 check_and_install_dependencies || exit 1
