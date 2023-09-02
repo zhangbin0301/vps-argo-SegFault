@@ -314,7 +314,6 @@ read choice
 case $choice in
     1)
         # 临时启动
-	FLIE_PATH='/tmp/'
         echo "临时启动..."
         nohup $PWD/start.sh 2>/dev/null 2>&1 &
 echo "等待脚本启动...，如果等待时间过长，可以重启尝试"
