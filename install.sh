@@ -215,12 +215,17 @@ EOL
 echo "等待脚本启动...，如果等待时间过长，可以重启尝试"
 sleep 10
 # 要检查的关键词
-keyword="bot.js"
+keyword="app.js"
 
 while true; do
   # 使用pgrep检查包含关键词的进程是否存在
   if pgrep -f "$keyword" > /dev/null; then
-    echo "脚本已启动"
+  echo "***************************************************"
+echo "                          "
+    echo "脚本启动成功，如果不能访问主页，请更换端口，确保端口是开放的端口"
+    echo "                          "
+echo "***************************************************"
+echo "                          "
     break
   else
     sleep 10
@@ -271,12 +276,17 @@ case $choice in
 echo "等待脚本启动...，如果等待时间过长，可以重启尝试"
 sleep 10
 # 要检查的关键词
-keyword="bot.js"
+keyword="app.js"
 
 while true; do
   # 使用pgrep检查包含关键词的进程是否存在
   if pgrep -f "$keyword" > /dev/null; then
-    echo "脚本已启动"
+  echo "***************************************************"
+echo "                          "
+    echo "脚本启动成功，如果不能访问主页，请更换端口，确保端口是开放的端口"
+    echo "                          "
+echo "***************************************************"
+echo "                          "
     break
   else
     sleep 10
