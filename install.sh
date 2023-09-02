@@ -119,6 +119,7 @@ check_and_install_dependencies() {
 
     # 检查并安装 curl
     if ! command -v curl &>/dev/null; then
+        echo "curl 命令未安装，将尝试安装..."
         echo "安装 curl..."
         if [[ "$linux_dist" == "Alpine Linux" ]]; then
              apk update
@@ -133,9 +134,36 @@ check_and_install_dependencies() {
             return 1
         fi
     fi
+# 检查是否已安装 pgrep 命令
+if ! command -v pgrep &>/dev/null; then
+    echo "pgrep 命令未安装，将尝试安装..."
+    case "$linux_dist" in
+        "Alpine Linux")
+            # 在 Alpine Linux 上安装 procps 包，其中包含了 pgrep 命令
+            apk update
+            apk add procps
+            ;;
+        "Ubuntu" | "Debian")
+            # 在 Ubuntu 和 Debian 上安装 procps 包，其中包含了 pgrep 命令
+            apt-get update
+            apt-get install -y procps
+            ;;
+        "CentOS")
+            # 在 CentOS 上安装 procps-ng 包，其中包含了 pgrep 命令
+            yum install -y procps-ng
+            ;;
+        *)
+            echo "不支持的 Linux 发行版：$linux_dist"
+            exit 1
+            ;;
+    esac
+    
+    echo "pgrep 命令已安装。"
+fi
 
     # 检查并安装 wget
     if ! command -v wget &>/dev/null; then
+    echo "wget 命令未安装，将尝试安装..."
         echo "安装 wget..."
         if [[ "$linux_dist" == "Alpine Linux" ]]; then
              apk update
@@ -153,6 +181,7 @@ check_and_install_dependencies() {
 
     # 检查并安装 systemctl
     if [[ ! -f /bin/systemctl && ! -f /usr/bin/systemctl ]]; then
+    echo "systemd 命令未安装，将尝试安装..."
         echo "安装 systemd..."
         if [[ "$linux_dist" == "Alpine Linux" ]]; then
              apk update
