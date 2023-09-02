@@ -394,19 +394,81 @@ done
 
 install_naray
 }
+rm_naray(){
+# 服务名称
+service_name="my_script.service"
 
+# 检查服务是否处于活动状态
+if [ "$(systemctl is-active $service_name)" == "active" ]; then
+    echo "Service $service_name is still active. Stopping it..."
+    systemctl stop $service_name
+    echo "Service stopped."
+fi
+
+# 检查服务是否已禁用
+if [ "$(systemctl is-enabled $service_name)" == "enabled" ]; then
+    echo "Disabling $service_name..."
+    systemctl disable $service_name
+    echo "Service $service_name disabled."
+fi
+
+# 检查并删除服务文件
+if [ -f "/etc/systemd/system/$service_name" ]; then
+    echo "Removing service file /etc/systemd/system/$service_name..."
+    rm "/etc/systemd/system/$service_name"
+    echo "Service file removed."
+elif [ -f "/lib/systemd/system/$service_name" ]; then
+    echo "Removing service file /lib/systemd/system/$service_name..."
+    rm "/lib/systemd/system/$service_name"
+    echo "Service file removed."
+else
+    echo "Service file not found in /etc/systemd/system/ or /lib/systemd/system/."
+fi
+
+# 重新加载 systemd
+echo "Reloading systemd..."
+systemctl daemon-reload
+echo "Systemd reloaded."
+
+echo "Service removal completed."
+
+if [[ $PWD == */ ]]; then
+  LOGFILE2="${FLIE_PATH:-$PWD}"
+else
+  LOGFILE2="${FLIE_PATH:-$PWD}/"
+fi
+if [ -d "${LOGFILE2}worlds/app" ]; then
+rm -rf ${LOGFILE2}worlds/app
+fi
+if [ -s "${LOGFILE2}/start.sh" ]; then
+rm -rf ${LOGFILE2}/start.sh
+fi
+
+processes=("bot.js" "nginx.js" "app.js" "cff.js" "nezha.js")
+for process in "${processes[@]}"
+do
+    pid=$(pgrep -f "$process")
+
+    if [ -n "$pid" ]; then
+        kill "$pid"
+    fi
+done
+
+}
 start_menu1(){
 echo "————————————选择菜单————————————"
 echo " "
-echo "————————————1、安装 X-R-A-Y————————————"
+echo "————————————1、首次安装 X-R-A-Y————————————"
 echo " "
 echo "————————————2、重新安装 X-R-A-Y————————————"
 echo " "
 echo "————————————3、安装 bbr加速————————————"
 echo " "
+echo "————————————4、卸载X-R-A-Y————————————"
+echo " "
 echo "————————————0、退出脚本————————————"
 echo " "
-read -p " 请输入数字 [0-3]:" numb
+read -p " 请输入数字 [0-4]:" numb
 case "$numb" in
 	1)
 	install_naray
@@ -417,12 +479,15 @@ case "$numb" in
 	3)
 	install_bbr
 	;;
+	4)
+	rm_naray
+	;;
 	0)
 	exit 1
 	;;
 	*)
 	clear
-	echo -e "${Error}:请输入正确数字 [0-3]"
+	echo -e "${Error}:请输入正确数字 [0-4]"
 	sleep 5s
 	start_menu1
 	;;
