@@ -1,4 +1,8 @@
 #!/bin/bash
+echo " ===========================================菜鸟学写脚本============================================="
+echo "                      "
+echo "                      "
+install_naray(){
 # 设置与x-r-ay配套的参数
 export UUID='fd80f56e-93f3-4c85-b2a8-c77216c509a7'
 export VPATH='vls'
@@ -296,3 +300,50 @@ echo "***************************************************"
         echo "无效的选项，退出。"
         ;;
 esac
+}
+install_bbr(){
+
+    # Check if curl is available
+    if command -v curl &>/dev/null; then
+        bash <(curl -sL https://git.io/kernel.sh)
+    # Check if wget is available
+    elif command -v wget &>/dev/null; then
+       bash <(wget -qO- https://git.io/kernel.sh)
+    else
+        echo "Error: Neither curl nor wget found. Please install one of them."
+        sleep 30
+        
+    fi
+
+
+
+}
+start_menu1(){
+echo "————————————选择菜单————————————"
+echo " "
+echo "————————————1、安装 X-R-A-Y————————————"
+echo " "
+echo "————————————2、安装 bbr加速————————————"
+echo " "
+echo "————————————3、退出脚本————————————"
+echo " "
+read -p " 请输入数字 [1-3]:" numb
+case "$numb" in
+	1)
+	install_naray
+	;;
+	2)
+	install_bbr
+	;;
+	3)
+	exit 1
+	;;
+	*)
+	clear
+	echo -e "${Error}:请输入正确数字 [1-3]"
+	sleep 5s
+	start_menu1
+	;;
+esac
+}
+start_menu1
