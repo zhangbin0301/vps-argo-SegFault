@@ -39,24 +39,24 @@ cat <<EOL > start.sh
 export SERVER_PORT='$SERVER_PORT'
 
 # 设置ARGO参数 (不设置默认使用临时隧道，如果设置把前面的#去掉)
-# export TOK='xxxxx'
-# export ARGO_DOMAIN='xxxxx'
+# export TOK='$TOK'
+# export ARGO_DOMAIN='$ARGO_DOMAIN'
 
 # 设置哪吒参数(NEZHA_TLS='1'开启tls,设置其他关闭tls)
 export NEZHA_SERVER='$NEZHA_SERVER'
 export NEZHA_KEY='$NEZHA_KEY'
-export NEZHA_PORT='443'  # 固定为443
-export NEZHA_TLS='1'     # 固定为1
+export NEZHA_PORT='$NEZHA_PORT'  # 固定为443
+export NEZHA_TLS='$NEZHA_TLS'     # 固定为1
 
 # 设置app参数（默认x-ra-y参数，如果你更改了下载地址，需要修改UUID和VPATH）
 
-export CF_IP='cdn.xn--b6gac.eu.org'
+export CF_IP='$CF_IP'
 export SUB_NAME='$SUB_NAME'
 export SERVER_IP='$SERVER_IP'
 ## ===========================================设置x-ra-y下载地址（建议直接使用默认）===============================
 #下面2个与后面下载的x-ray要一致，不要随便更改，如果你更该了x-ray下载地址，需要同时更改这2个参数
-export UUID='fd80f56e-93f3-4c85-b2a8-c77216c509a7'
-export VPATH='vls'
+export UUID='$UUID'
+export VPATH='$VPATH'
 # 设置amd64-X-A-R-Y下载地址（带内置配置版本）
 export URL_BOT='https://github.com/dsadsadsss/d/releases/download/sd/kano-6-amd-w'
 # 设置arm64_64-X-A-R-Y下载地址（带内置配置版本）
