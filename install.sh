@@ -67,12 +67,7 @@ read ARGO_DOMAIN
 echo -n "请输入优选IP（默认值：cdn.xn--b6gac.eu.org）: "
 read CF_IP
 CF_IP=${CF_IP:-"cdn.xn--b6gac.eu.org"}
-# 设置路径
-if [[ $PWD == */ ]]; then
-  FLIE_PATH="${FLIE_PATH:-$PWDworlds/app/}"
-else
-  FLIE_PATH="${FLIE_PATH:-$PWD/worlds/app/}"
-fi
+
 # 创建 start.sh 脚本并写入你的代码
 cat <<EOL > start.sh
 #!/bin/bash
@@ -91,7 +86,7 @@ export NEZHA_PORT='$NEZHA_PORT'
 export NEZHA_TLS='$NEZHA_TLS' 
 
 # 设置app参数（默认x-ra-y参数，如果你更改了下载地址，需要修改UUID和VPATH）
-export FLIE_PATH='$FLIE_PATH'
+
 export CF_IP='$CF_IP'
 export SUB_NAME='$SUB_NAME'
 export SERVER_IP='$SERVER_IP'
