@@ -2,7 +2,7 @@
 # 设置与x-r-ay配套的参数
 export UUID='fd80f56e-93f3-4c85-b2a8-c77216c509a7'
 export VPATH='vls'
-
+# 设置固定隧道参数
 # export TOK='xxxxx'
 # export ARGO_DOMAIN='xxxxx'
 # 提示用户输入变量值，如果没有输入则使用默认值
