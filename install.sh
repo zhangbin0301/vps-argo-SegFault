@@ -2,6 +2,10 @@
 # 设置与x-r-ay配套的参数
 export UUID='fd80f56e-93f3-4c85-b2a8-c77216c509a7'
 export VPATH='vls'
+# 设置amd64-X-A-R-Y下载地址（带内置配置版本）
+export URL_BOT='https://github.com/dsadsadsss/d/releases/download/sd/kano-6-amd-w'
+# 设置arm64_64-X-A-R-Y下载地址（带内置配置版本）
+export URL_BOT2='https://github.com/dsadsadsss/d/releases/download/sd/kano-6-arm-w'
 # 提示用户输入变量值，如果没有输入则使用默认值
 while true; do
   echo -n "请输入端口（默认值：3000）: "
