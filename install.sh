@@ -3,6 +3,8 @@ echo " ===========================================菜鸟学写脚本============
 echo "                      "
 echo "                      "
 install_naray(){
+
+install_config(){
 # 设置与x-r-ay配套的参数
 UUID='fd80f56e-93f3-4c85-b2a8-c77216c509a7'
 VPATH='vls'
@@ -81,8 +83,28 @@ read ARGO_DOMAIN
 echo -n "请输入优选IP（默认值：cdn.xn--b6gac.eu.org）: "
 read CF_IP
 CF_IP=${CF_IP:-"cdn.xn--b6gac.eu.org"}
+if [[ $PWD == */ ]]; then
+  FLIE_PATH="${FLIE_PATH:-$PWD}worlds/app/"
+else
+  FLIE_PATH="${FLIE_PATH:-$PWD}/worlds/app/"
+fi
+}
+
+install_config2(){
+# 设置与x-r-ay配套的参数
+UUID='fd80f56e-93f3-4c85-b2a8-c77216c509a7'
+VPATH='vls'
+# 设置amd64-X-A-R-Y下载地址（带内置配置版本）
+URL_BOT='https://github.com/dsadsadsss/d/releases/download/sd/kano-6-amd-w'
+# 设置arm64_64-X-A-R-Y下载地址（带内置配置版本）
+URL_BOT2='https://github.com/dsadsadsss/d/releases/download/sd/kano-6-arm-w'
+SUB_NAME=${SUB_NAME:-"vps"}
+CF_IP=${CF_IP:-"cdn.xn--b6gac.eu.org"}
+FLIE_PATH="/tmp/"
+}
 
 # 创建 start.sh 脚本并写入你的代码
+install_start(){
 cat <<EOL > start.sh
 #!/bin/bash
 ## ===========================================设置各参数（不需要的可以删掉或者前面加# ）=============================================
@@ -100,6 +122,7 @@ export NEZHA_PORT='$NEZHA_PORT'
 export NEZHA_TLS='$NEZHA_TLS' 
 
 # 设置app参数（默认x-ra-y参数，如果你更改了下载地址，需要修改UUID和VPATH）
+export FLIE_PATH='$FLIE_PATH'
 export CF_IP='$CF_IP'
 export SUB_NAME='$SUB_NAME'
 export SERVER_IP='$SERVER_IP'
@@ -134,7 +157,7 @@ EOL
 
 # 赋予 start.sh 执行权限
 chmod +x start.sh
-
+}
 # 函数：检查并安装依赖软件
 check_and_install_dependencies() {
     # 依赖软件列表
@@ -174,6 +197,10 @@ check_and_install_dependencies() {
 
 # 函数：配置开机启动
 configure_startup() {
+    # 检查并安装依赖软件
+    check_and_install_dependencies
+    install_config
+    install_start
     # 根据不同的 Linux 发行版采用不同的开机启动方案
     case "$linux_dist" in
         "Alpine Linux")
@@ -283,19 +310,20 @@ elif [[ $linux_dist == *"CentOS"* ]]; then
 fi
 
 
-# 检查并安装依赖软件
-check_and_install_dependencies
-
 # 输出菜单，让用户选择是否直接启动或添加到开机启动再启动
+start_menu2(){
 echo "请选择操作："
 echo "1. 临时启动"
 echo "2. 开机启动"
+echo "0. 退出"
 read choice
 
 case $choice in
     1)
         # 临时启动
         echo "临时启动..."
+        install_config2
+        install_start
         nohup $PWD/start.sh 2>/dev/null 2>&1 &
 echo "等待脚本启动...，如果等待时间过长，可以重启尝试"
 sleep 10
@@ -357,10 +385,18 @@ fi
         configure_startup
         echo "已添加到开机启动"
         ;;
-    *)
-        echo "无效的选项，退出。"
-        ;;
+	  0)
+	    exit 1
+	    ;;
+  	*)
+	  clear
+	  echo -e "${Error}:请输入正确数字 [0-2]"
+	  sleep 5s
+	  start_menu2
+	  ;;
 esac
+}
+start_menu2
 }
 
 install_bbr(){
