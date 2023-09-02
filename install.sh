@@ -1,6 +1,7 @@
 #!/bin/bash
 # 设置与x-r-ay配套的参数
-
+export UUID='fd80f56e-93f3-4c85-b2a8-c77216c509a7'
+export VPATH='vls'
 # 提示用户输入变量值，如果没有输入则使用默认值
 while true; do
   echo -n "请输入端口（默认值：3000）: "
@@ -16,10 +17,12 @@ while true; do
   fi
 done
 
-
 echo -n "请输入IP地址或VPS域名 : "
 read SERVER_IP
 
+echo -n "请输入 节点名称（默认值：vps）: "
+read SUB_NAME
+SUB_NAME=${SUB_NAME:-"vps"}
 
 echo -n "请输入 NEZHA_SERVER（默认值：ata.vps.eu.org）: "
 read NEZHA_SERVER
@@ -33,14 +36,20 @@ echo -n "请输入 NEZHA_PORT（默认值：443）: "
 read NEZHA_PORT
 NEZHA_PORT=${NEZHA_PORT:-"443"}
 
-echo -n "请输入 是否开启tls（开启1，关闭0,默认值：1）: "
+echo -n "请输入是否开启哪吒的tls（开启1，关闭0,默认值：1）: "
 read NEZHA_TLS
 NEZHA_TLS=${NEZHA_TLS:-"1"}
 
-echo -n "请输入 节点名称（默认值：vps）: "
-read SUB_NAME
-SUB_NAME=${SUB_NAME:-"vps"}
+# 设置固定隧道参数
+echo -n "请输入隧道token（临时隧道不需要设置）: "
+read TOK
+echo -n "请输入隧道域名（设置了TOKEN这里必须填，临时隧道不需要设置）: "
+read ARGO_DOMAIN
 
+# 设置其他参数
+echo -n "请输入优选IP（默认值：cdn.xn--b6gac.eu.org）: "
+read CF_IP
+CF_IP=${CF_IP:-"cdn.xn--b6gac.eu.org"}
 # 创建 start.sh 脚本并写入你的代码
 cat <<EOL > start.sh
 #!/bin/bash
