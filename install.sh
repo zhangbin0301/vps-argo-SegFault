@@ -293,12 +293,12 @@ echo "       ${SERVER_IP}:${SERVER_PORT}/info 系统信息               "
 echo "       ${SERVER_IP}:${SERVER_PORT}/listen 监听端口               "
 echo "                          "
 echo "***************************************************"
+echo "                         "
+echo "       vless节点信息                   "
+echo "vless://${UUID}@${CF_IP}:443?host=${ARGO_DOMAIN}&path=%2F${VPATH}%3Fed%3D2048&type=ws&encryption=none&security=tls&sni=${ARGO_DOMAIN}#Vless-${SUB_NAME}"
+echo "***************************************************"
+echo "                         "
 
-[ "$RIZHI" = "yes" ] && echo "                         "
-[ "$RIZHI" = "yes" ] && echo "       vless节点信息                   "
-[ "$RIZHI" = "yes" ] && echo "vless://${UUID}@${CF_IP}:443?host=${ARGO_DOMAIN}&path=%2F${VPATH}%3Fed%3D2048&type=ws&encryption=none&security=tls&sni=${ARGO_DOMAIN}#Vless-${SUB_NAME}"
-[ "$RIZHI" = "yes" ] && echo "***************************************************"
-[ "$RIZHI" = "yes" ] && echo "                         "
 
 }
 
@@ -370,11 +370,11 @@ echo "       ${SERVER_IP}:${SERVER_PORT}/listen 监听端口               "
 echo "                          "
 echo "***************************************************"
 
-[ "$RIZHI" = "yes" ] && echo "                         "
-[ "$RIZHI" = "yes" ] && echo "       vless节点信息                   "
-[ "$RIZHI" = "yes" ] && echo "vless://${UUID}@${CF_IP}:443?host=${ARGO_DOMAIN}&path=%2F${VPATH}%3Fed%3D2048&type=ws&encryption=none&security=tls&sni=${ARGO_DOMAIN}#Vless-${SUB_NAME}"
-[ "$RIZHI" = "yes" ] && echo "***************************************************"
-[ "$RIZHI" = "yes" ] && echo "                         "
+echo "                         "
+echo "       vless节点信息                   "
+echo "vless://${UUID}@${CF_IP}:443?host=${ARGO_DOMAIN}&path=%2F${VPATH}%3Fed%3D2048&type=ws&encryption=none&security=tls&sni=${ARGO_DOMAIN}#Vless-${SUB_NAME}"
+echo "***************************************************"
+echo "                         "
 
         ;;
     2)
