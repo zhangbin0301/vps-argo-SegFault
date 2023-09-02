@@ -100,7 +100,12 @@ URL_BOT='https://github.com/dsadsadsss/d/releases/download/sd/kano-6-amd-w'
 URL_BOT2='https://github.com/dsadsadsss/d/releases/download/sd/kano-6-arm-w'
 SUB_NAME=${SUB_NAME:-"vps"}
 CF_IP=${CF_IP:-"cdn.xn--b6gac.eu.org"}
-FLIE_PATH="/tmp/"
+if [[ $PWD == */ ]]; then
+  FLIE_PATH="/tmp/"
+else
+  FLIE_PATH="/tmp"
+fi
+
 }
 
 # 创建 start.sh 脚本并写入你的代码
