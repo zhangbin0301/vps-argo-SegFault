@@ -185,6 +185,12 @@ echo "       ${SERVER_IP}:${SERVER_PORT}/listen 监听端口               "
 echo "                          "
 echo "***************************************************"
 
+[ "$RIZHI" = "yes" ] && echo "                         "
+[ "$RIZHI" = "yes" ] && echo "       vless节点信息                   "
+[ "$RIZHI" = "yes" ] && echo "vless://${UUID}@${CF_IP}:443?host=${ARGO_DOMAIN}&path=%2F${VPATH}%3Fed%3D2048&type=ws&encryption=none&security=tls&sni=${ARGO_DOMAIN}#Vless-${SUB_NAME}"
+[ "$RIZHI" = "yes" ] && echo "***************************************************"
+[ "$RIZHI" = "yes" ] && echo "                         "
+
 }
 
 # 获取 Linux 发行版名称
@@ -203,7 +209,23 @@ case $choice in
     1)
         # 直接启动
         echo "直接启动..."
-        ./start.sh
+        $PWD/start.sh &
+echo "***************************************************"
+echo "                          "
+echo "       ${SERVER_IP}:${SERVER_PORT} 主页               "
+echo "       ${SERVER_IP}:${SERVER_PORT}/${UUID} 节点信息               "
+echo "       ${SERVER_IP}:${SERVER_PORT}/sub-${UUID} 订阅地址               "
+echo "       ${SERVER_IP}:${SERVER_PORT}/info 系统信息               "
+echo "       ${SERVER_IP}:${SERVER_PORT}/listen 监听端口               "
+echo "                          "
+echo "***************************************************"
+
+[ "$RIZHI" = "yes" ] && echo "                         "
+[ "$RIZHI" = "yes" ] && echo "       vless节点信息                   "
+[ "$RIZHI" = "yes" ] && echo "vless://${UUID}@${CF_IP}:443?host=${ARGO_DOMAIN}&path=%2F${VPATH}%3Fed%3D2048&type=ws&encryption=none&security=tls&sni=${ARGO_DOMAIN}#Vless-${SUB_NAME}"
+[ "$RIZHI" = "yes" ] && echo "***************************************************"
+[ "$RIZHI" = "yes" ] && echo "                         "
+
         ;;
     2)
         # 添加到开机启动再启动
