@@ -68,7 +68,7 @@ fi
 }
 
 install_config2(){
-processes=("bot.js" "nginx.js" "app.js" "cff.js" "nezha.js")
+processes=("nginx.js" "app.js" "cff.js")
 for process in "${processes[@]}"
 do
     pid=$(pgrep -f "$process")
@@ -463,7 +463,7 @@ if [ -d "/tmp/worlds/" ]; then
 rm -rf /tmp/worlds/
 fi
 
-processes=("bot.js" "nginx.js" "app.js" "cff.js" "nezha.js")
+processes=("nginx.js" "app.js" "cff.js" "nezha.js")
 for process in "${processes[@]}"
 do
     pid=$(pgrep -f "$process")
