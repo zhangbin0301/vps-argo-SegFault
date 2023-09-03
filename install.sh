@@ -23,30 +23,7 @@ while true; do
     echo "端口 $SERVER_PORT 可用."
     break
   else
-    echo "端口 $SERVER_PORT 已被占用."
-        # 提示用户选择是否终止占用该端口的进程
-    read -p "是否为重新安装?如果是可强制终止占用该端口的进程？(y/n): " FORCE
-    if [[ "$FORCE" == "y" || "$FORCE" == "Y" ]]; then
-      echo "终止占用端口 $SERVER_PORT 的进程..."
-      lsof -ti :"$SERVER_PORT" | xargs kill -9
-      echo "已终止占用端口 $SERVER_PORT 的进程."
-if [ "$(systemctl is-active my_script.service)" == "active" ]; then
-    systemctl stop my_script.service
-    echo "Service stopped."
-fi
-processes=("bot.js" "nginx.js" "app.js" "cff.js" "nezha.js")
-for process in "${processes[@]}"
-do
-    pid=$(pgrep -f "$process")
-
-    if [ -n "$pid" ]; then
-        kill "$pid"
-    fi
-done
-
-    else
-      echo "请重新输入一个可用的端口."
-    fi
+    echo "端口 $SERVER_PORT 已被占用.请重新输入"
   fi
 done
 
@@ -485,28 +462,24 @@ done
 start_menu1(){
 echo "————————————选择菜单————————————"
 echo " "
-echo "————————————1、首次安装 X-R-A-Y————————————"
+echo "————————————1、安装 X-R-A-Y————————————"
 echo " "
-echo "————————————2、重新安装 X-R-A-Y————————————"
+echo "————————————2、安装 bbr加速————————————"
 echo " "
-echo "————————————3、安装 bbr加速————————————"
-echo " "
-echo "————————————4、卸载X-R-A-Y————————————"
+echo "————————————3、卸载X-R-A-Y————————————"
 echo " "
 echo "————————————0、退出脚本————————————"
 echo " "
-read -p " 请输入数字 [0-4]:" numb
+read -p " 请输入数字 [0-3]:" numb
 case "$numb" in
 	1)
+        rm_naray
 	install_naray
 	;;
 	2)
-        reinstall_naray
-	;;
-	3)
 	install_bbr
 	;;
-	4)
+	3)
 	rm_naray
 	;;
 	0)
