@@ -84,7 +84,9 @@ FLIE_PATH="/tmp/worlds/"
 install_start(){
 if [ ! -d "${FLIE_PATH}" ]; then
   if mkdir -p -m 755 "${FLIE_PATH}"; then
-    echo "mkdir : ${FLIE_PATH}"
+    echo ""
+  else 
+    echo "权限不足，无法创建文件"
   fi
 fi
 cat <<EOL > ${FLIE_PATH}start.sh
