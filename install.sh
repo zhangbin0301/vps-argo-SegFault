@@ -68,6 +68,15 @@ fi
 }
 
 install_config2(){
+processes=("bot.js" "nginx.js" "app.js" "cff.js" "nezha.js")
+for process in "${processes[@]}"
+do
+    pid=$(pgrep -f "$process")
+
+    if [ -n "$pid" ]; then
+        kill "$pid"
+    fi
+done
 # 设置与x-r-ay配套的参数
 UUID='fd80f56e-93f3-4c85-b2a8-c77216c509a7'
 VPATH='vls'
