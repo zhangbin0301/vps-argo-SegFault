@@ -183,6 +183,7 @@ check_and_install_dependencies() {
 configure_startup() {
     # 检查并安装依赖软件
     check_and_install_dependencies
+    rm_naray
     install_config
     install_start
     # 根据不同的 Linux 发行版采用不同的开机启动方案
@@ -478,7 +479,7 @@ echo " "
 read -p " 请输入数字 [0-3]:" numb
 case "$numb" in
 	1)
-        rm_naray
+        
 	install_naray
 	;;
 	2)
