@@ -190,8 +190,8 @@ configure_startup() {
         "Alpine Linux")
             # 对于 Alpine Linux：
             # 添加开机启动脚本到 rc.local
-            nohup $PWD/start.sh 2>/dev/null 2>&1 &
-            echo "$PWD/start.sh &" |  tee -a /etc/rc.local > /dev/null
+            nohup ${FLIE_PATH}start.sh 2>/dev/null 2>&1 &
+            echo "${FLIE_PATH}start.sh" |  tee -a /etc/rc.local > /dev/null
              chmod +x /etc/rc.local
             ;;
 
