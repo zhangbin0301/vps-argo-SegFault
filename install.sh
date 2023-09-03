@@ -288,10 +288,13 @@ fi
 
 # 输出菜单，让用户选择是否直接启动或添加到开机启动再启动
 start_menu2(){
-echo "请选择操作："
-echo "1. 临时启动"
-echo "2. 开机启动"
-echo "0. 退出"
+echo ">>>>>>>>请选择操作："
+echo "       "
+echo "       1. 临时启动"
+echo "       "
+echo "       2. 开机启动"
+echo "       "
+echo "       0. 退出"
 read choice
 
 case $choice in
