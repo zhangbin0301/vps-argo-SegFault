@@ -5,13 +5,12 @@ echo "                      "
 install_naray(){
 
 install_config(){
-# 设置与x-r-ay配套的参数
-UUID='fd80f56e-93f3-4c85-b2a8-c77216c509a7'
+# 设置与x-r-ay的参数
+echo -n "请输入 UUID（默认值：fd80f56e-93f3-4c85-b2a8-c77216c509a7）: "
+read UUID
+UUID=${UUID:-"fd80f56e-93f3-4c85-b2a8-c77216c509a7"}
 VPATH='vls'
-# 设置amd64-X-A-R-Y下载地址（带内置配置版本）
-URL_BOT='https://github.com/dsadsadsss/d/releases/download/sd/kano-6-amd-w'
-# 设置arm64_64-X-A-R-Y下载地址（带内置配置版本）
-URL_BOT2='https://github.com/dsadsadsss/d/releases/download/sd/kano-6-arm-w'
+
 # 提示用户输入变量值，如果没有输入则使用默认值
 while true; do
   echo -n "请输入端口（默认值：3000）: "
@@ -77,13 +76,12 @@ do
         kill "$pid"
     fi
 done
-# 设置与x-r-ay配套的参数
-UUID='fd80f56e-93f3-4c85-b2a8-c77216c509a7'
+# 设置与x-r-ay的参数
+echo -n "请输入 UUID（默认值：fd80f56e-93f3-4c85-b2a8-c77216c509a7）: "
+read UUID
+UUID=${UUID:-"fd80f56e-93f3-4c85-b2a8-c77216c509a7"}
 VPATH='vls'
-# 设置amd64-X-A-R-Y下载地址（带内置配置版本）
-URL_BOT='https://github.com/dsadsadsss/d/releases/download/sd/kano-6-amd-w'
-# 设置arm64_64-X-A-R-Y下载地址（带内置配置版本）
-URL_BOT2='https://github.com/dsadsadsss/d/releases/download/sd/kano-6-arm-w'
+
 SUB_NAME=${SUB_NAME:-"vps"}
 CF_IP=${CF_IP:-"cdn.xn--b6gac.eu.org"}
 FLIE_PATH="/tmp/worlds/"
@@ -120,14 +118,8 @@ export CF_IP='$CF_IP'
 export SUB_NAME='$SUB_NAME'
 export SERVER_IP='$SERVER_IP'
 ## ===========================================设置x-ra-y下载地址（建议直接使用默认）===============================
-#下面2个与后面下载的x-ray要一致，不要随便更改，如果你更该了x-ray下载地址，需要同时更改这2个参数
 export UUID='$UUID'
 export VPATH='$VPATH'
-# 设置amd64-X-A-R-Y下载地址（带内置配置版本）
-export URL_BOT='$URL_BOT'
-# 设置arm64_64-X-A-R-Y下载地址（带内置配置版本）
-export URL_BOT2='$URL_BOT2'
-
 if command -v curl &>/dev/null; then
     DOWNLOAD_CMD="curl -sL"
 # Check if wget is available
