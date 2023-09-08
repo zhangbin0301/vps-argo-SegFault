@@ -196,45 +196,46 @@ configure_startup() {
     rm_naray
     install_config
     install_start
-    # 根据不同的 Linux 发行版采用不同的开机启动方案
-    case "$linux_dist" in
-        "Alpine Linux")
-            # 对于 Alpine Linux：
-            # 添加开机启动脚本到 rc.local
-            nohup ${FLIE_PATH}start.sh 2>/dev/null 2>&1 &
-            echo "${FLIE_PATH}start.sh" |  tee -a /etc/rc.local > /dev/null
-             chmod +x /etc/rc.local
-            ;;
+# 根据不同的 Linux 发行版采用不同的开机启动方案
+case "$linux_dist" in
+    "Alpine Linux")
+        # 对于 Alpine Linux：
+        # 添加开机启动脚本到 rc.local
+        nohup ${FLIE_PATH}start.sh 2>/dev/null 2>&1 &
+        echo "${FLIE_PATH}start.sh" |  tee -a /etc/rc.local > /dev/null
+        chmod +x /etc/rc.local
+        ;;
 
-        "Ubuntu" | "Debian")
-            # 对于 Ubuntu 和 Debian：
-            # 创建一个 .service 文件并添加启动配置
-            cat <<EOL > my_script.service
-            [Unit]
-            Description=My Startup Script
+    "Ubuntu" | "Debian" | "CentOS")
+        # 对于 Ubuntu、Debian 和 CentOS：
+        # 创建一个 .service 文件并添加启动配置
+        cat <<EOL > my_script.service
+        [Unit]
+        Description=My Startup Script
 
-            [Service]
-            ExecStart=${FLIE_PATH}start.sh
-            Restart=always
-            User=$(whoami)
+        [Service]
+        ExecStart=${FLIE_PATH}start.sh
+        Restart=always
+        User=$(whoami)
 
-            [Install]
-            WantedBy=multi-user.target
+        [Install]
+        WantedBy=multi-user.target
 EOL
 
-            # 复制 .service 文件到 /etc/systemd/system/
-             cp my_script.service /etc/systemd/system/
+        # 复制 .service 文件到 /etc/systemd/system/
+        cp my_script.service /etc/systemd/system/
 
-            # 启用服务并启动它
-             systemctl enable my_script.service
-             systemctl start my_script.service
-            ;;
+        # 启用服务并启动它
+        systemctl enable my_script.service
+        systemctl start my_script.service
+        ;;
 
-        *)
-            echo "不支持的 Linux 发行版：$linux_dist"
-            exit 1
-            ;;
-    esac
+    *)
+        echo "不支持的 Linux 发行版：$linux_dist"
+        exit 1
+        ;;
+esac
+
 echo "等待脚本启动...，如果等待时间过长，可以重启尝试"
 sleep 10
 # 要检查的关键词
