@@ -11,6 +11,10 @@ read UUID
 UUID=${UUID:-"fd80f56e-93f3-4c85-b2a8-c77216c509a7"}
 VPATH='vls'
 
+# 设置订阅上传地址
+echo -n "请输入设置订阅上传地址: "
+read SUB_URL
+
 # 提示用户输入变量值，如果没有输入则使用默认值
 while true; do
   echo -n "请输入端口（默认值：3000）: "
@@ -82,6 +86,10 @@ read UUID
 UUID=${UUID:-"fd80f56e-93f3-4c85-b2a8-c77216c509a7"}
 VPATH='vls'
 
+# 设置订阅上传地址
+echo -n "请输入设置订阅上传地址: "
+read SUB_URL
+
 SUB_NAME=${SUB_NAME:-"vps"}
 CF_IP=${CF_IP:-"cdn.xn--b6gac.eu.org"}
 FLIE_PATH="/tmp/worlds/"
@@ -120,6 +128,7 @@ export SERVER_IP='$SERVER_IP'
 ## ===========================================设置x-ra-y下载地址（建议直接使用默认）===============================
 export UUID='$UUID'
 export VPATH='$VPATH'
+export SUB_URL='$SUB_URL'
 if command -v curl &>/dev/null; then
     DOWNLOAD_CMD="curl -sL"
 # Check if wget is available
