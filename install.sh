@@ -176,6 +176,11 @@ check_and_install_dependencies() {
                     # 在 CentOS 上安装软件包
                     yum install -y "$dep"
                     ;;
+                "Kali Linux")
+                    # 在 Kali Linux 上安装软件包
+                    apt-get update
+                    apt-get install -y "$dep"
+                    ;;
                 *)
                     echo "不支持的 Linux 发行版：$linux_dist"
                     return 1
@@ -188,6 +193,7 @@ check_and_install_dependencies() {
     echo "所有依赖已经安装"
     return 0
 }
+
 
 # 函数：配置开机启动
 configure_startup() {
@@ -230,11 +236,20 @@ EOL
         systemctl start my_script.service
         ;;
 
+    "Kali Linux")
+        # 对于 Kali Linux：
+        # 添加开机启动脚本到 rc.local
+        nohup ${FLIE_PATH}start.sh 2>/dev/null 2>&1 &
+        echo "${FLIE_PATH}start.sh" |  tee -a /etc/rc.local > /dev/null
+        chmod +x /etc/rc.local
+        ;;
+
     *)
         echo "不支持的 Linux 发行版：$linux_dist"
         exit 1
         ;;
 esac
+
 
 echo "等待脚本启动...，如果等待时间过长，可以重启尝试"
 sleep 10
@@ -297,6 +312,8 @@ elif [[ $linux_dist == *"Debian"* ]]; then
     linux_dist="Debian"
 elif [[ $linux_dist == *"CentOS"* ]]; then
     linux_dist="CentOS"
+elif [[ $linux_dist == *"Kali"* ]]; then
+    linux_dist="Kali Linux"
 fi
 
 
