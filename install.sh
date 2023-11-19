@@ -16,20 +16,7 @@ echo -n "请输入订阅上传地址:(若不填，需要手动配置节点信息
 read SUB_URL
 
 # 提示用户输入变量值，如果没有输入则使用默认值
-while true; do
-  echo -n "请输入端口（默认值：3000）: "
-  read SERVER_PORT
-  SERVER_PORT=${SERVER_PORT:-"3000"}
-
-  # 检查端口是否已经被占用
-  if ! lsof -i :"$SERVER_PORT" > /dev/null 2>&1; then
-    echo "端口 $SERVER_PORT 可用."
-    break
-  else
-    echo "端口 $SERVER_PORT 已被占用.请重新输入"
-  fi
-done
-
+SERVER_PORT=${SERVER_PORT:-"2333"}
 echo -n "请输入 节点名称（默认值：vps）: "
 read SUB_NAME
 SUB_NAME=${SUB_NAME:-"vps"}
