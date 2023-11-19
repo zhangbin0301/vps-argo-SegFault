@@ -33,7 +33,7 @@ echo -n "请输入 NEZHA_PORT（默认值：443）: "
 read NEZHA_PORT
 NEZHA_PORT=${NEZHA_PORT:-"443"}
 
-echo -n "是否开启哪吒的tls（关闭0,默认开启）: "
+echo -n "是否开启哪吒的tls（默认开启,需要关闭设置0）: "
 read NEZHA_TLS
 NEZHA_TLS=${NEZHA_TLS:-"1"}
 
@@ -253,7 +253,6 @@ echo "                          "
   fi
 done
 
-echo "***************************************************"
 
 }
 
