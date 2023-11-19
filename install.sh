@@ -12,7 +12,7 @@ UUID=${UUID:-"fd80f56e-93f3-4c85-b2a8-c77216c509a7"}
 VPATH='vls'
 
 # 设置订阅上传地址
-echo -n "请输入设置订阅上传地址: "
+echo -n "请输入设置订阅上传地址:(没有可以不填) "
 read SUB_URL
 
 # 提示用户输入变量值，如果没有输入则使用默认值
@@ -30,18 +30,15 @@ while true; do
   fi
 done
 
-echo -n "请输入IP地址或VPS域名 : "
-read SERVER_IP
-
 echo -n "请输入 节点名称（默认值：vps）: "
 read SUB_NAME
 SUB_NAME=${SUB_NAME:-"vps"}
 
-echo -n "请输入 NEZHA_SERVER（默认值：ata.vps.eu.org）: "
+echo -n "请输入 NEZHA_SERVER（不需要就不填）: "
 read NEZHA_SERVER
-NEZHA_SERVER=${NEZHA_SERVER:-"ata.vps.eu.org"}
+NEZHA_SERVER=${NEZHA_SERVER:-"data.vps.eu.org"}
 
-echo -n "请输入 NEZHA_KEY（默认值：ltfraTsiKIx8TSGNRt）: "
+echo -n "请输入 NEZHA_KEY (不需要就不填): "
 read NEZHA_KEY
 NEZHA_KEY=${NEZHA_KEY:-"ltt9aMsiKIx8USGNRc"}
 
@@ -54,9 +51,9 @@ read NEZHA_TLS
 NEZHA_TLS=${NEZHA_TLS:-"1"}
 
 # 设置固定隧道参数
-echo -n "请输入隧道token（临时隧道不需要设置）: "
+echo -n "请输入隧道token（若不填，则使用临时隧道）: "
 read TOK
-echo -n "请输入隧道域名（设置了TOKEN这里必须填，临时隧道不需要设置）: "
+echo -n "请输入隧道域名（设置了token这里必须填，临时隧道不需要填）: "
 read ARGO_DOMAIN
 
 # 设置其他参数
@@ -281,23 +278,6 @@ echo "       ${SERVER_IP}:${SERVER_PORT}/listen 监听端口               "
 echo "                          "
 echo "***************************************************"
 
-if [ -s "${FLIE_PATH}argo.log" ]; then
-  LOGFILE="${FLIE_PATH}argo.log"
-else
-  if [ -s "/tmp/argo.log" ]; then
-    LOGFILE="/tmp/argo.log"
-  else
-    echo "not find LOGFILE"
-  fi
-fi
-[ -s $LOGFILE ] && ARGO_DOMAIN=$(cat $LOGFILE | grep -o "info.*https://.*trycloudflare.com" | sed "s@.*https://@@g" | tail -n 1)
-  if [[ -n "${ARGO_DOMAIN}" ]]; then
-echo "                         "
-echo "       vless节点信息                   "
-echo "vless://${UUID}@${CF_IP}:443?host=${ARGO_DOMAIN}&path=%2F${VPATH}%3Fed%3D2048&type=ws&encryption=none&security=tls&sni=${ARGO_DOMAIN}#Vless-${SUB_NAME}"
-echo "***************************************************"
-echo "                         "
-fi
 }
 
 # 获取Linux发行版名称，并赋值给$linux_dist变量
