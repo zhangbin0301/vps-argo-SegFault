@@ -33,14 +33,14 @@ echo -n "请输入 NEZHA_PORT（默认值：443）: "
 read NEZHA_PORT
 NEZHA_PORT=${NEZHA_PORT:-"443"}
 
-echo -n "请输入是否开启哪吒的tls（开启1，关闭0,默认值：开启）: "
+echo -n "是否开启哪吒的tls（关闭0,默认开启）: "
 read NEZHA_TLS
 NEZHA_TLS=${NEZHA_TLS:-"1"}
 
 # 设置固定隧道参数
-echo -n "请输入隧道token : "
+echo -n "请输入固定隧道token(不填则使用临时隧道) : "
 read TOK
-echo -n "请输入隧道域名 : "
+echo -n "请输入隧道域名(设置固定隧道后填写，临时隧道不需要) : "
 read ARGO_DOMAIN
 
 # 设置其他参数
@@ -69,7 +69,7 @@ UUID=${UUID:-"fd80f56e-93f3-4c85-b2a8-c77216c509a7"}
 VPATH='vls'
 
 # 设置订阅上传地址
-echo -n "请输入设置订阅上传地址: "
+echo -n "请输入订阅上传地址: "
 read SUB_URL
 
 SUB_NAME=${SUB_NAME:-"vps"}
@@ -243,7 +243,7 @@ while true; do
   if pgrep -f "$keyword" > /dev/null; then
   echo "***************************************************"
 echo "                          "
-    echo "脚本启动成功，可以查看隧道，手动配置节点，端口8002，路径vls"
+    echo "脚本启动成功，如果未设置订阅上传地址，需要设置固定隧道，手动配置节点，协议vless,端口8002，路径vls"
     echo "                          "
 echo "***************************************************"
 echo "                          "
