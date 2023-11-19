@@ -23,11 +23,11 @@ SUB_NAME=${SUB_NAME:-"vps"}
 
 echo -n "请输入 NEZHA_SERVER（不需要就不填）: "
 read NEZHA_SERVER
-NEZHA_SERVER=${NEZHA_SERVER:-"data.vps.eu.org"}
+
 
 echo -n "请输入 NEZHA_KEY (不需要就不填): "
 read NEZHA_KEY
-NEZHA_KEY=${NEZHA_KEY:-"ltt9aMsiKIx8USGNRc"}
+
 
 echo -n "请输入 NEZHA_PORT（默认值：443）: "
 read NEZHA_PORT
