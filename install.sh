@@ -12,7 +12,7 @@ UUID=${UUID:-"fd80f56e-93f3-4c85-b2a8-c77216c509a7"}
 VPATH='vls'
 
 # 设置订阅上传地址
-echo -n "请输入设置订阅上传地址:(没有可以不填) "
+echo -n "请输入订阅上传地址:(若不填，需要手动配置节点信息) "
 read SUB_URL
 
 # 提示用户输入变量值，如果没有输入则使用默认值
@@ -46,14 +46,14 @@ echo -n "请输入 NEZHA_PORT（默认值：443）: "
 read NEZHA_PORT
 NEZHA_PORT=${NEZHA_PORT:-"443"}
 
-echo -n "请输入是否开启哪吒的tls（开启1，关闭0,默认值：1）: "
+echo -n "请输入是否开启哪吒的tls（开启1，关闭0,默认值：开启）: "
 read NEZHA_TLS
 NEZHA_TLS=${NEZHA_TLS:-"1"}
 
 # 设置固定隧道参数
-echo -n "请输入隧道token（若不填，则使用临时隧道）: "
+echo -n "请输入隧道token : "
 read TOK
-echo -n "请输入隧道域名（设置了token这里必须填，临时隧道不需要填）: "
+echo -n "请输入隧道域名 : "
 read ARGO_DOMAIN
 
 # 设置其他参数
