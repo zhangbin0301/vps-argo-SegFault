@@ -57,8 +57,6 @@ echo -n "请输入隧道域名 : "
 read ARGO_DOMAIN
 
 # 设置其他参数
-echo -n "请输入优选IP（默认值：cdn.xn--b6gac.eu.org）: "
-read CF_IP
 CF_IP=${CF_IP:-"cdn.xn--b6gac.eu.org"}
 if [[ $PWD == */ ]]; then
   FLIE_PATH="${FLIE_PATH:-${PWD}worlds/}"
