@@ -269,14 +269,6 @@ echo "                          "
 done
 
 echo "***************************************************"
-echo "                          "
-echo "       ${SERVER_IP}:${SERVER_PORT} 主页               "
-echo "       ${SERVER_IP}:${SERVER_PORT}/${UUID} 节点信息               "
-echo "       ${SERVER_IP}:${SERVER_PORT}/sub-${UUID} 订阅地址               "
-echo "       ${SERVER_IP}:${SERVER_PORT}/info 系统信息               "
-echo "       ${SERVER_IP}:${SERVER_PORT}/listen 监听端口               "
-echo "                          "
-echo "***************************************************"
 
 }
 
