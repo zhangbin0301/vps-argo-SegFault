@@ -236,7 +236,7 @@ EOL
 esac
 
 
-echo "等待脚本启动...，如果等待时间过长，可以重启尝试"
+echo "等待脚本启动...如果超过2分钟，可能是判断不准确，实际已经成功，可以通过观察哪吒自行判断或重启尝试"
 sleep 10
 # 要检查的关键词
 keyword="app.js"
@@ -294,7 +294,7 @@ case $choice in
         install_config2
         install_start
         nohup ${FLIE_PATH}start.sh 2>/dev/null 2>&1 &
-echo "等待脚本启动...，如果等待时间过长，可以重启尝试"
+echo "等待脚本启动...，如果等待时间过长(超过2分钟)，可能是判断不准确，实际已经成功，可以通过观察哪吒自行判断"
 sleep 10
 
 # 要检查的关键词
