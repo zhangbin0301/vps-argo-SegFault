@@ -72,6 +72,8 @@ VPATH='vls'
 echo -n "请输入订阅上传地址: "
 read SUB_URL
 
+echo -n "请输入节点名称（默认值vps）: "
+read SUB_NAME
 SUB_NAME=${SUB_NAME:-"vps"}
 CF_IP=${CF_IP:-"cdn.xn--b6gac.eu.org"}
 FLIE_PATH="/tmp/worlds/"
