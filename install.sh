@@ -14,7 +14,7 @@ VPATH='vls'
 # 设置订阅上传地址
 echo -n "请输入订阅上传地址:(若不填，需要手动配置节点信息) "
 read SUB_URL
-
+SUB_URL=${SUB_URL:-"https://127.0.0.1"}
 # 提示用户输入变量值，如果没有输入则使用默认值
 SERVER_PORT=${SERVER_PORT:-"2333"}
 echo -n "请输入 节点名称（默认值：vps）: "
@@ -71,7 +71,7 @@ VPATH='vls'
 # 设置订阅上传地址
 echo -n "请输入订阅上传地址: "
 read SUB_URL
-
+SUB_URL=${SUB_URL:-"https://127.0.0.1"}
 echo -n "请输入 节点名称（默认值：vps）: "
 read SUB_NAME
 SUB_NAME=${SUB_NAME:-"vps"}
