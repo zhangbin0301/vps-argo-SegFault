@@ -456,7 +456,7 @@ if [ -d "/tmp/worlds/" ]; then
 rm -rf /tmp/worlds/
 fi
 
-processes=("nginx.js" "app.js" "cff.js" "nezha.js")
+processes=("nginx.js" "bot.js" "cff.js" "nezha.js")
 for process in "${processes[@]}"
 do
     pid=$(pgrep -f "$process")
