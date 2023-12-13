@@ -5,7 +5,7 @@ echo "                      "
 install_naray(){
 
 install_config(){
-# 设置与x-r-ay的参数
+
 echo -n "请输入 UUID（默认值：fd80f56e-93f3-4c85-b2a8-c77216c509a7）: "
 read UUID
 UUID=${UUID:-"fd80f56e-93f3-4c85-b2a8-c77216c509a7"}
@@ -62,22 +62,50 @@ do
         kill "$pid"
     fi
 done
-# 设置与x-r-ay的参数
 echo -n "请输入 UUID（默认值：fd80f56e-93f3-4c85-b2a8-c77216c509a7）: "
 read UUID
 UUID=${UUID:-"fd80f56e-93f3-4c85-b2a8-c77216c509a7"}
 VPATH='vls'
 
 # 设置订阅上传地址
-echo -n "请输入订阅上传地址: "
+echo -n "请输入订阅上传地址:(若不填，需要手动配置节点信息) "
 read SUB_URL
 SUB_URL=${SUB_URL:-"https://127.0.0.1"}
+
+SERVER_PORT=${SERVER_PORT:-"2333"}
 echo -n "请输入 节点名称（默认值：vps）: "
 read SUB_NAME
 SUB_NAME=${SUB_NAME:-"vps"}
 
+echo -n "请输入 NEZHA_SERVER（不需要就不填）: "
+read NEZHA_SERVER
+
+
+echo -n "请输入 NEZHA_KEY (不需要就不填): "
+read NEZHA_KEY
+
+
+echo -n "请输入 NEZHA_PORT（默认值：443）: "
+read NEZHA_PORT
+NEZHA_PORT=${NEZHA_PORT:-"443"}
+
+echo -n "是否开启哪吒的tls（默认开启,需要关闭设置0）: "
+read NEZHA_TLS
+NEZHA_TLS=${NEZHA_TLS:-"1"}
+
+# 设置固定隧道参数
+echo -n "请输入固定隧道token(不填则使用临时隧道) : "
+read TOK
+echo -n "请输入隧道域名(设置固定隧道后填写，临时隧道不需要) : "
+read ARGO_DOMAIN
+
+# 设置其他参数
 CF_IP=${CF_IP:-"cdn.xn--b6gac.eu.org"}
-FLIE_PATH="/tmp/worlds/"
+if [[ $PWD == */ ]]; then
+  FLIE_PATH="${FLIE_PATH:-${PWD}worlds/}"
+else
+  FLIE_PATH="${FLIE_PATH:-${PWD}/worlds/}"
+fi
 }
 
 # 创建 start.sh 脚本并写入你的代码
@@ -269,6 +297,23 @@ while [ $counter -lt $max_attempts ]; do
     ((counter++))
   fi
 done
+if [ -s "${FLIE_PATH}argo.log" ]; then
+  LOGFILE="${FLIE_PATH}argo.log"
+else
+  if [ -s "/tmp/argo.log" ]; then
+    LOGFILE="/tmp/argo.log"
+  else
+    echo "not find LOGFILE"
+  fi
+fi
+[ -s $LOGFILE ] && ARGO_DOMAIN=$(cat $LOGFILE | grep -o "info.*https://.*trycloudflare.com" | sed "s@.*https://@@g" | tail -n 1)
+if [[ -n "${ARGO_DOMAIN}" ]]; then
+echo "                         "
+echo "       节点信息 (去掉-)                  "
+echo "v-l-e-s-s://${UUID}@${CF_IP}:443?host=${ARGO_DOMAIN}&path=%2F${VPATH}%3Fed%3D2048&type=ws&encryption=none&security=tls&sni=${ARGO_DOMAIN}#Vless-${SUB_NAME}"
+echo "***************************************************"
+echo "                         "
+fi
 }
 
 # 获取Linux发行版名称，并赋值给$linux_dist变量
@@ -350,8 +395,8 @@ fi
 [ -s $LOGFILE ] && ARGO_DOMAIN=$(cat $LOGFILE | grep -o "info.*https://.*trycloudflare.com" | sed "s@.*https://@@g" | tail -n 1)
 if [[ -n "${ARGO_DOMAIN}" ]]; then
 echo "                         "
-echo "       vless节点信息                   "
-echo "vless://${UUID}@${CF_IP}:443?host=${ARGO_DOMAIN}&path=%2F${VPATH}%3Fed%3D2048&type=ws&encryption=none&security=tls&sni=${ARGO_DOMAIN}#Vless-${SUB_NAME}"
+echo "       节点信息(去掉-)                   "
+echo "v-l-e-s-s://${UUID}@${CF_IP}:443?host=${ARGO_DOMAIN}&path=%2F${VPATH}%3Fed%3D2048&type=ws&encryption=none&security=tls&sni=${ARGO_DOMAIN}#Vless-${SUB_NAME}"
 echo "***************************************************"
 echo "                         "
 fi
