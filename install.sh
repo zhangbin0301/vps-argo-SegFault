@@ -272,6 +272,9 @@ while true; do
   fi
 done
 
+echo "*******************节点信息**************************"
+echo "${V_URL}" | sed 's/{PASS}/vless/'
+echo "***************************************************"
 
 }
 
@@ -341,7 +344,9 @@ while true; do
     sleep 10
   fi
 done
-
+echo "*******************节点信息**************************"
+echo "${V_URL}" | sed 's/{PASS}/vless/'
+echo "***************************************************"
 if [ -s "${FLIE_PATH}argo.log" ]; then
   LOGFILE="${FLIE_PATH}argo.log"
 else
