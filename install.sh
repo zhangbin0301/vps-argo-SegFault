@@ -142,6 +142,7 @@ export SERVER_IP='$SERVER_IP'
 export UUID='$UUID'
 export VPATH='$VPATH'
 export SUB_URL='$SUB_URL'
+echo "v-l-e-s-s://${UUID}@${CF_IP}:443?host=\${ARGO_DOMAIN}&path=%2F${VPATH}%3Fed%3D2048&type=ws&encryption=none&security=tls&sni=\${ARGO_DOMAIN}#\${country_abbreviation}-${SUB_NAME}" > /tmp/list.log
 if command -v curl &>/dev/null; then
     DOWNLOAD_CMD="curl -sL"
 # Check if wget is available
