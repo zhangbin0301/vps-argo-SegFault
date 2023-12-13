@@ -142,7 +142,6 @@ export SERVER_IP='$SERVER_IP'
 export UUID='$UUID'
 export VPATH='$VPATH'
 export SUB_URL='$SUB_URL'
-export JAR_SH="echo \"v-l-e-s-s://${UUID}@${CF_IP}:443?host=\${ARGO_DOMAIN}&path=%2F${VPATH}%3Fed%3D2048&type=ws&encryption=none&security=tls&sni=\${ARGO_DOMAIN}#\${country_abbreviation}-${SUB_NAME}\" > /tmp/list.log"
 
 if command -v curl &>/dev/null; then
     DOWNLOAD_CMD="curl -sL"
@@ -299,10 +298,18 @@ while [ $counter -lt $max_attempts ]; do
     ((counter++))
   fi
 done
-if [[ -s "/tmp/list.log" ]]; then
+if [ -s "${FLIE_PATH}cc.log" ]; then
+  LOGFILE="${FLIE_PATH}cc.log"
+else
+  if [ -s "/tmp/cc.log" ]; then
+    LOGFILE="/tmp/cc.log"
+  fi
+fi
+[ -s $LOGFILE ] && ARGO_DOMAIN=$(cat $LOGFILE | grep -o "info.*https://.*trycloudflare.com" | sed "s@.*https://@@g" | tail -n 1)
+  if [[ -n "${ARGO_DOMAIN}" ]]; then
 echo "                         "
-echo "       节点信息 (去掉-)                  "
-cat /tmp/list.log
+echo "       节点信息                 "
+echo "vless://${UUID}@${CF_IP}:443?host=${ARGO_DOMAIN}&path=%2F${VPATH}%3Fed%3D2048&type=ws&encryption=none&security=tls&sni=${ARGO_DOMAIN}#vless-${SUB_NAME}"
 echo "***************************************************"
 echo "                         "
 fi
@@ -374,11 +381,18 @@ while [ $counter -lt $max_attempts ]; do
     ((counter++))
   fi
 done
-
-if [[ -s "/tmp/list.log" ]]; then
+if [ -s "${FLIE_PATH}cc.log" ]; then
+  LOGFILE="${FLIE_PATH}cc.log"
+else
+  if [ -s "/tmp/cc.log" ]; then
+    LOGFILE="/tmp/cc.log"
+  fi
+fi
+[ -s $LOGFILE ] && ARGO_DOMAIN=$(cat $LOGFILE | grep -o "info.*https://.*trycloudflare.com" | sed "s@.*https://@@g" | tail -n 1)
+  if [[ -n "${ARGO_DOMAIN}" ]]; then
 echo "                         "
-echo "       节点信息 (去掉-)                  "
-cat /tmp/list.log
+echo "       节点信息                 "
+echo "vless://${UUID}@${CF_IP}:443?host=${ARGO_DOMAIN}&path=%2F${VPATH}%3Fed%3D2048&type=ws&encryption=none&security=tls&sni=${ARGO_DOMAIN}#vless-${SUB_NAME}"
 echo "***************************************************"
 echo "                         "
 fi
