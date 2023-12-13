@@ -236,16 +236,15 @@ EOL
 esac
 
 
-echo "等待脚本启动...如果超过2分钟，可能是判断不准确，实际已经成功，可以通过观察哪吒自行判断或重启尝试"
+echo "等待脚本启动...如果等待时间过长，可能是判断不准确，实际已经成功，可以通过观察哪吒自行判断或重启尝试"
 sleep 10
-# 要检查的关键词
 keyword="app.js"
+max_attempts=5
+counter=0
 
-while true; do
+while [ $counter -lt $max_attempts ]; do
   # 使用pgrep检查包含关键词的进程是否存在
   if command -v pgrep > /dev/null && pgrep -f "$keyword" > /dev/null; then
-    
-    # Additional logic if needed
     
     echo "***************************************************"
     echo "                          "
@@ -257,8 +256,6 @@ while true; do
     break
   elif ps aux | grep "$keyword" | grep -v grep > /dev/null; then
     
-    # Additional logic if needed
-    
     echo "***************************************************"
     echo "                          "
     echo "脚本启动成功，如果未设置订阅上传地址，需要设置固定隧道，手动配置节点，协议vless,端口8002，路径vls"
@@ -269,6 +266,7 @@ while true; do
     break
   else
     sleep 10
+    ((counter++))
   fi
 done
 
@@ -313,14 +311,15 @@ case $choice in
         install_config2
         install_start
         nohup ${FLIE_PATH}start.sh 2>/dev/null 2>&1 &
-echo "等待脚本启动...，如果等待时间过长(超过2分钟)，可能是判断不准确，实际已经成功，可以通过观察哪吒自行判断"
+echo "等待脚本启动...，如果等待时间过长，可能是判断不准确，实际已经成功，可以通过观察哪吒自行判断"
 sleep 10
 keyword="app.js"
+max_attempts=5
+counter=0
 
-while true; do
+while [ $counter -lt $max_attempts ]; do
   # 使用pgrep检查包含关键词的进程是否存在
   if command -v pgrep > /dev/null && pgrep -f "$keyword" > /dev/null; then
-    
     echo "***************************************************"
     echo "                          "
     echo "脚本启动成功，如果未设置订阅上传地址，需要设置固定隧道，手动配置节点，协议vless,端口8002，路径vls"
@@ -330,8 +329,6 @@ while true; do
     
     break
   elif ps aux | grep "$keyword" | grep -v grep > /dev/null; then
-    
-    
     echo "***************************************************"
     echo "                          "
     echo "脚本启动成功，如果未设置订阅上传地址，需要设置固定隧道，手动配置节点，协议vless,端口8002，路径vls"
@@ -342,8 +339,10 @@ while true; do
     break
   else
     sleep 10
+    ((counter++))
   fi
 done
+
 echo "*******************节点信息**************************"
 echo "${V_URL}" | sed 's/{PASS}/vless/'
 echo "***************************************************"
