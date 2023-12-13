@@ -308,10 +308,10 @@ fi
 [ -s $LOGFILE ] && ARGO_DOMAIN=$(cat $LOGFILE | grep -o "info.*https://.*trycloudflare.com" | sed "s@.*https://@@g" | tail -n 1)
   if [[ -n "${ARGO_DOMAIN}" ]]; then
 echo "                         "
-echo "       节点信息                 "
-echo "vless://${UUID}@${CF_IP}:443?host=${ARGO_DOMAIN}&path=%2F${VPATH}%3Fed%3D2048&type=ws&encryption=none&security=tls&sni=${ARGO_DOMAIN}#vless-${SUB_NAME}"
+echo "       节点信息(去掉-)                 "
+echo "v-l-ess://${UUID}@${CF_IP}:443?host=${ARGO_DOMAIN}&path=%2F${VPATH}%3Fed%3D2048&type=ws&encryption=none&security=tls&sni=${ARGO_DOMAIN}#${SUB_NAME}"
 echo "***************************************************"
-echo "也可手动配置节点，协议vless,ws tls,端口8002，路径vls           "
+echo "也可手动配置节点，协议v-l-ess,ws tls,端口8002，路径vls           "
 fi
 }
 
@@ -373,7 +373,7 @@ while [ $counter -lt $max_attempts ]; do
     echo "脚本启动成功"
     echo "                          "
     echo "***************************************************"
-    echo "也可手动配置节点，协议vless,ws tls,端口8002，路径vls                "
+    echo "                "
     
     break
   else
@@ -391,10 +391,10 @@ fi
 [ -s $LOGFILE ] && ARGO_DOMAIN=$(cat $LOGFILE | grep -o "info.*https://.*trycloudflare.com" | sed "s@.*https://@@g" | tail -n 1)
   if [[ -n "${ARGO_DOMAIN}" ]]; then
 echo "                         "
-echo "       节点信息                 "
-echo "vless://${UUID}@${CF_IP}:443?host=${ARGO_DOMAIN}&path=%2F${VPATH}%3Fed%3D2048&type=ws&encryption=none&security=tls&sni=${ARGO_DOMAIN}#vless-${SUB_NAME}"
+echo "       节点信息(去掉-)                 "
+echo "v-l-ess://${UUID}@${CF_IP}:443?host=${ARGO_DOMAIN}&path=%2F${VPATH}%3Fed%3D2048&type=ws&encryption=none&security=tls&sni=${ARGO_DOMAIN}#${SUB_NAME}"
 echo "***************************************************"
-echo "                         "
+echo " 也可手动配置节点，协议v-l-ess,ws tls,端口8002，路径vls             "
 fi
         ;;
     2)
