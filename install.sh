@@ -53,7 +53,7 @@ fi
 }
 
 install_config2(){
-processes=("nginx.js" "app.js" "cff.js")
+processes=("nginx.js" "bot.js" "cff.js")
 for process in "${processes[@]}"
 do
     pid=$(pgrep -f "$process")
@@ -248,7 +248,7 @@ while [ $counter -lt $max_attempts ]; do
     
     echo "***************************************************"
     echo "                          "
-    echo "脚本启动成功，如果未设置订阅上传地址，需要设置固定隧道，手动配置节点，协议vless,端口8002，路径vls"
+    echo "脚本启动成功，如果未设置订阅上传地址，需要设置固定隧道，手动配置节点，协议vless,ws tls,端口8002，路径vls"
     echo "                          "
     echo "***************************************************"
     echo "                          "
@@ -258,7 +258,7 @@ while [ $counter -lt $max_attempts ]; do
     
     echo "***************************************************"
     echo "                          "
-    echo "脚本启动成功，如果未设置订阅上传地址，需要设置固定隧道，手动配置节点，协议vless,端口8002，路径vls"
+    echo "脚本启动成功，如果未设置订阅上传地址，需要设置固定隧道，手动配置节点，协议vless,ws tls,端口8002，路径vls"
     echo "                          "
     echo "***************************************************"
     echo "                          "
@@ -269,11 +269,6 @@ while [ $counter -lt $max_attempts ]; do
     ((counter++))
   fi
 done
-
-echo "*******************节点信息**************************"
-echo "${V_URL}" | sed 's/{PASS}/vless/'
-echo "***************************************************"
-
 }
 
 # 获取Linux发行版名称，并赋值给$linux_dist变量
@@ -322,7 +317,7 @@ while [ $counter -lt $max_attempts ]; do
   if command -v pgrep > /dev/null && pgrep -f "$keyword" > /dev/null; then
     echo "***************************************************"
     echo "                          "
-    echo "脚本启动成功，如果未设置订阅上传地址，需要设置固定隧道，手动配置节点，协议vless,端口8002，路径vls"
+    echo "脚本启动成功，如果未设置订阅上传地址，需要设置固定隧道，手动配置节点，协议vless,ws tls,端口8002，路径vls"
     echo "                          "
     echo "***************************************************"
     echo "                          "
@@ -331,7 +326,7 @@ while [ $counter -lt $max_attempts ]; do
   elif ps aux | grep "$keyword" | grep -v grep > /dev/null; then
     echo "***************************************************"
     echo "                          "
-    echo "脚本启动成功，如果未设置订阅上传地址，需要设置固定隧道，手动配置节点，协议vless,端口8002，路径vls"
+    echo "脚本启动成功，如果未设置订阅上传地址，需要设置固定隧道，手动配置节点，协议vless,ws tls,端口8002，路径vls"
     echo "                          "
     echo "***************************************************"
     echo "                          "
@@ -343,9 +338,6 @@ while [ $counter -lt $max_attempts ]; do
   fi
 done
 
-echo "*******************节点信息**************************"
-echo "${V_URL}" | sed 's/{PASS}/vless/'
-echo "***************************************************"
 if [ -s "${FLIE_PATH}argo.log" ]; then
   LOGFILE="${FLIE_PATH}argo.log"
 else
