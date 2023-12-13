@@ -243,13 +243,29 @@ keyword="app.js"
 
 while true; do
   # 使用pgrep检查包含关键词的进程是否存在
-  if pgrep -f "$keyword" > /dev/null; then
-  echo "***************************************************"
-echo "                          "
+  if command -v pgrep > /dev/null && pgrep -f "$keyword" > /dev/null; then
+    
+    # Additional logic if needed
+    
+    echo "***************************************************"
+    echo "                          "
     echo "脚本启动成功，如果未设置订阅上传地址，需要设置固定隧道，手动配置节点，协议vless,端口8002，路径vls"
     echo "                          "
-echo "***************************************************"
-echo "                          "
+    echo "***************************************************"
+    echo "                          "
+    
+    break
+  elif ps aux | grep "$keyword" | grep -v grep > /dev/null; then
+    
+    # Additional logic if needed
+    
+    echo "***************************************************"
+    echo "                          "
+    echo "脚本启动成功，如果未设置订阅上传地址，需要设置固定隧道，手动配置节点，协议vless,端口8002，路径vls"
+    echo "                          "
+    echo "***************************************************"
+    echo "                          "
+    
     break
   else
     sleep 10
@@ -296,25 +312,35 @@ case $choice in
         nohup ${FLIE_PATH}start.sh 2>/dev/null 2>&1 &
 echo "等待脚本启动...，如果等待时间过长(超过2分钟)，可能是判断不准确，实际已经成功，可以通过观察哪吒自行判断"
 sleep 10
-
-# 要检查的关键词
 keyword="app.js"
 
 while true; do
   # 使用pgrep检查包含关键词的进程是否存在
-  if pgrep -f "$keyword" > /dev/null; then
-  echo "***************************************************"
-echo "                          "
-    echo "脚本启动成功"
+  if command -v pgrep > /dev/null && pgrep -f "$keyword" > /dev/null; then
+    
+    echo "***************************************************"
     echo "                          "
-echo "***************************************************"
-echo "                          "
+    echo "脚本启动成功，如果未设置订阅上传地址，需要设置固定隧道，手动配置节点，协议vless,端口8002，路径vls"
+    echo "                          "
+    echo "***************************************************"
+    echo "                          "
+    
+    break
+  elif ps aux | grep "$keyword" | grep -v grep > /dev/null; then
+    
+    
+    echo "***************************************************"
+    echo "                          "
+    echo "脚本启动成功，如果未设置订阅上传地址，需要设置固定隧道，手动配置节点，协议vless,端口8002，路径vls"
+    echo "                          "
+    echo "***************************************************"
+    echo "                          "
+    
     break
   else
     sleep 10
   fi
 done
-echo "***************************************************"
 
 if [ -s "${FLIE_PATH}argo.log" ]; then
   LOGFILE="${FLIE_PATH}argo.log"
