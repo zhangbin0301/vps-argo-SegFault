@@ -277,7 +277,7 @@ while [ $counter -lt $max_attempts ]; do
     
     echo "***************************************************"
     echo "                          "
-    echo "脚本启动成功，如果未设置订阅上传地址，需要设置固定隧道，手动配置节点，协议vls,ws tls,端口8002，路径vls"
+    echo "脚本启动成功"
     echo "                          "
     echo "***************************************************"
     echo "                          "
@@ -287,7 +287,7 @@ while [ $counter -lt $max_attempts ]; do
     
     echo "***************************************************"
     echo "                          "
-    echo "脚本启动成功，如果未设置订阅上传地址，需要设置固定隧道，手动配置节点，协议vls,ws tls,端口8002，路径vls"
+    echo "脚本启动成功"
     echo "                          "
     echo "***************************************************"
     echo "                          "
@@ -311,7 +311,7 @@ echo "                         "
 echo "       节点信息                 "
 echo "vless://${UUID}@${CF_IP}:443?host=${ARGO_DOMAIN}&path=%2F${VPATH}%3Fed%3D2048&type=ws&encryption=none&security=tls&sni=${ARGO_DOMAIN}#vless-${SUB_NAME}"
 echo "***************************************************"
-echo "                         "
+echo "也可手动配置节点，协议vless,ws tls,端口8002，路径vls           "
 fi
 }
 
@@ -361,7 +361,7 @@ while [ $counter -lt $max_attempts ]; do
   if command -v pgrep > /dev/null && pgrep -f "$keyword" > /dev/null; then
     echo "***************************************************"
     echo "                          "
-    echo "脚本启动成功，如果未设置订阅上传地址，需要设置固定隧道，手动配置节点，协议vls,ws tls,端口8002，路径vls"
+    echo "脚本启动成功"
     echo "                          "
     echo "***************************************************"
     echo "                          "
@@ -370,10 +370,10 @@ while [ $counter -lt $max_attempts ]; do
   elif ps aux | grep "$keyword" | grep -v grep > /dev/null; then
     echo "***************************************************"
     echo "                          "
-    echo "脚本启动成功，如果未设置订阅上传地址，需要设置固定隧道，手动配置节点，协议vls,ws tls,端口8002，路径vls"
+    echo "脚本启动成功"
     echo "                          "
     echo "***************************************************"
-    echo "                          "
+    echo "也可手动配置节点，协议vless,ws tls,端口8002，路径vls                "
     
     break
   else
