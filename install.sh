@@ -302,8 +302,6 @@ if [ -s "${FLIE_PATH}argo.log" ]; then
 else
   if [ -s "/tmp/argo.log" ]; then
     LOGFILE="/tmp/argo.log"
-  else
-    echo "not find LOGFILE"
   fi
 fi
 [ -s $LOGFILE ] && ARGO_DOMAIN=$(cat $LOGFILE | grep -o "info.*https://.*trycloudflare.com" | sed "s@.*https://@@g" | tail -n 1)
@@ -388,8 +386,6 @@ if [ -s "${FLIE_PATH}argo.log" ]; then
 else
   if [ -s "/tmp/argo.log" ]; then
     LOGFILE="/tmp/argo.log"
-  else
-    echo "not find LOGFILE"
   fi
 fi
 [ -s $LOGFILE ] && ARGO_DOMAIN=$(cat $LOGFILE | grep -o "info.*https://.*trycloudflare.com" | sed "s@.*https://@@g" | tail -n 1)
