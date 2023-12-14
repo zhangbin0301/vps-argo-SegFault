@@ -279,9 +279,6 @@ while [ $counter -lt $max_attempts ]; do
     echo "                          "
     echo "脚本启动成功"
     echo "                          "
-    echo "***************************************************"
-    echo "                          "
-    
     break
   elif ps aux | grep "$keyword" | grep -v grep > /dev/null; then
     
@@ -289,9 +286,6 @@ while [ $counter -lt $max_attempts ]; do
     echo "                          "
     echo "脚本启动成功"
     echo "                          "
-    echo "***************************************************"
-    echo "                          "
-    
     break
   else
     sleep 10
@@ -308,7 +302,7 @@ fi
 echo "                         "
 echo "**************节点信息(去掉-)*********************   "
 echo "                         "
-sed 's/{PASS}/vless/g' $LOGFILE | cat
+sed 's/{PASS}/v-l-ess/g' $LOGFILE | cat
 echo "                         "
 echo "***************************************************"
 echo "                         "
@@ -365,17 +359,12 @@ while [ $counter -lt $max_attempts ]; do
     echo "                          "
     echo "脚本启动成功"
     echo "                          "
-    echo "***************************************************"
-    echo "                          "
-    
     break
   elif ps aux | grep "$keyword" | grep -v grep > /dev/null; then
     echo "***************************************************"
     echo "                          "
     echo "脚本启动成功"
     echo "                          "
-    echo "***************************************************"
-    echo "                "
     
     break
   else
@@ -393,7 +382,7 @@ fi
 echo "                         "
 echo "**************节点信息(去掉-)*********************   "
 echo "                         "
-sed 's/{PASS}/vless/g' $LOGFILE | cat
+sed 's/{PASS}/v-l-ess/g' $LOGFILE | cat
 echo "                         "
 echo "***************************************************"
 echo "                         "
