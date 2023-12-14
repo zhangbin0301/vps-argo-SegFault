@@ -390,11 +390,10 @@ else
     LOGFILE="/tmp/list.log"
   fi
 fi
-echo "***************************************************"
 echo "                         "
-echo "       节点信息(去掉-)                 "
+echo "**************节点信息(去掉-)*********************   "
 echo "                         "
-sed 's/{PASS}/vless/g' ${LOGFILE} | cat
+sed 's/{PASS}/vless/g' $LOGFILE | cat
 echo "                         "
 echo "***************************************************"
 echo "                         "
