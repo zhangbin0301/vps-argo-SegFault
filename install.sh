@@ -273,36 +273,36 @@ counter=0
 
 while [ $counter -lt $max_attempts ]; do
   # 使用pgrep检查包含关键词的进程是否存在
-  if command -v pgrep > /dev/null && pgrep -f "$keyword" > /dev/null; then
-    
+ if command -v pgrep > /dev/null && pgrep -f "$keyword" > /dev/null && [ -s /tmp/list.log ]; then
+
     echo "***************************************************"
     echo "                          "
     echo "脚本启动成功"
     echo "                          "
     break
-  elif ps aux | grep "$keyword" | grep -v grep > /dev/null; then
-    
+  elif ps aux | grep "$keyword" | grep -v grep > /dev/null && [ -s /tmp/list.log ]; then
     echo "***************************************************"
     echo "                          "
     echo "脚本启动成功"
     echo "                          "
+    
     break
   else
     sleep 10
     ((counter++))
   fi
 done
-if [ -s "${FLIE_PATH}list.log" ]; then
-  LOGFILE="${FLIE_PATH}list.log"
-else
-  if [ -s "/tmp/list.log" ]; then
-    LOGFILE="/tmp/list.log"
-  fi
-fi
+
 echo "                         "
 echo "**************节点信息(去掉-)*********************   "
 echo "                         "
-sed 's/{PASS}/v-l-ess/g' $LOGFILE | cat
+if [ -s "${FLIE_PATH}list.log" ]; then
+  sed 's/{PASS}/v-l-ess/g' ${FLIE_PATH}list.log | cat
+else
+  if [ -s "/tmp/list.log" ]; then
+    sed 's/{PASS}/v-l-ess/g' /tmp/list.log | cat
+  fi
+fi
 echo "                         "
 echo "***************************************************"
 echo "                         "
@@ -354,13 +354,14 @@ counter=0
 
 while [ $counter -lt $max_attempts ]; do
   # 使用pgrep检查包含关键词的进程是否存在
-  if command -v pgrep > /dev/null && pgrep -f "$keyword" > /dev/null; then
+ if command -v pgrep > /dev/null && pgrep -f "$keyword" > /dev/null && [ -s /tmp/list.log ]; then
+
     echo "***************************************************"
     echo "                          "
     echo "脚本启动成功"
     echo "                          "
     break
-  elif ps aux | grep "$keyword" | grep -v grep > /dev/null; then
+  elif ps aux | grep "$keyword" | grep -v grep > /dev/null && [ -s /tmp/list.log ]; then
     echo "***************************************************"
     echo "                          "
     echo "脚本启动成功"
@@ -372,17 +373,17 @@ while [ $counter -lt $max_attempts ]; do
     ((counter++))
   fi
 done
-if [ -s "${FLIE_PATH}list.log" ]; then
-  LOGFILE="${FLIE_PATH}list.log"
-else
-  if [ -s "/tmp/list.log" ]; then
-    LOGFILE="/tmp/list.log"
-  fi
-fi
+
 echo "                         "
 echo "**************节点信息(去掉-)*********************   "
 echo "                         "
-sed 's/{PASS}/v-l-ess/g' $LOGFILE | cat
+if [ -s "${FLIE_PATH}list.log" ]; then
+  sed 's/{PASS}/v-l-ess/g' ${FLIE_PATH}list.log | cat
+else
+  if [ -s "/tmp/list.log" ]; then
+    sed 's/{PASS}/v-l-ess/g' /tmp/list.log | cat
+  fi
+fi
 echo "                         "
 echo "***************************************************"
 echo "                         "
