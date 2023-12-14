@@ -298,21 +298,24 @@ while [ $counter -lt $max_attempts ]; do
     ((counter++))
   fi
 done
-if [ -s "${FLIE_PATH}cc.log" ]; then
-  LOGFILE="${FLIE_PATH}cc.log"
+if [ -s "${FLIE_PATH}list.log" ]; then
+  LOGFILE="${FLIE_PATH}list.log"
 else
-  if [ -s "/tmp/cc.log" ]; then
-    LOGFILE="/tmp/cc.log"
+  if [ -s "/tmp/list.log" ]; then
+    LOGFILE="/tmp/list.log"
   fi
 fi
-[ -s $LOGFILE ] && ARGO_DOMAIN=$(cat $LOGFILE | grep -o "info.*https://.*trycloudflare.com" | sed "s@.*https://@@g" | tail -n 1)
-  if [[ -n "${ARGO_DOMAIN}" ]]; then
+echo "***************************************************"
 echo "                         "
 echo "       节点信息(去掉-)                 "
-echo "v-l-ess://${UUID}@${CF_IP}:443?host=${ARGO_DOMAIN}&path=%2F${VPATH}%3Fed%3D2048&type=ws&encryption=none&security=tls&sni=${ARGO_DOMAIN}#${SUB_NAME}"
+echo "                         "
+sed 's/{PASS}/vless/g' ${LOGFILE} | cat
+echo "                         "
 echo "***************************************************"
+echo "                         "
 echo "也可手动配置节点，协议v-l-ess,ws tls,端口8002，路径vls           "
-fi
+echo "                         "
+echo "***************************************************"
 }
 
 # 获取Linux发行版名称，并赋值给$linux_dist变量
@@ -381,21 +384,24 @@ while [ $counter -lt $max_attempts ]; do
     ((counter++))
   fi
 done
-if [ -s "${FLIE_PATH}cc.log" ]; then
-  LOGFILE="${FLIE_PATH}cc.log"
+if [ -s "${FLIE_PATH}list.log" ]; then
+  LOGFILE="${FLIE_PATH}list.log"
 else
-  if [ -s "/tmp/cc.log" ]; then
-    LOGFILE="/tmp/cc.log"
+  if [ -s "/tmp/list.log" ]; then
+    LOGFILE="/tmp/list.log"
   fi
 fi
-[ -s $LOGFILE ] && ARGO_DOMAIN=$(cat $LOGFILE | grep -o "info.*https://.*trycloudflare.com" | sed "s@.*https://@@g" | tail -n 1)
-  if [[ -n "${ARGO_DOMAIN}" ]]; then
+echo "***************************************************"
 echo "                         "
 echo "       节点信息(去掉-)                 "
-echo "v-l-ess://${UUID}@${CF_IP}:443?host=${ARGO_DOMAIN}&path=%2F${VPATH}%3Fed%3D2048&type=ws&encryption=none&security=tls&sni=${ARGO_DOMAIN}#${SUB_NAME}"
+echo "                         "
+sed 's/{PASS}/vless/g' ${LOGFILE} | cat
+echo "                         "
 echo "***************************************************"
-echo " 也可手动配置节点，协议v-l-ess,ws tls,端口8002，路径vls             "
-fi
+echo "                         "
+echo "也可手动配置节点，协议v-l-ess,ws tls,端口8002，路径vls           "
+echo "                         "
+echo "***************************************************"
         ;;
     2)
         # 添加到开机启动再启动
