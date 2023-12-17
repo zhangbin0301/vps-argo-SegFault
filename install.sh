@@ -1,4 +1,4 @@
-#!/bin/bash
+*#!/bin/bash
 echo " =================vps一键脚本隧道版========================"
 echo "                      "
 echo "                      "
@@ -491,7 +491,7 @@ if [ -d "/tmp/worlds/" ]; then
 rm -rf /tmp/worlds/
 fi
 
-processes=("nginx.js" "bot.js" "cff.js" "nezha.js")
+processes=("nginx.js" "bot.js" "cff.js" "nezha.js" "app.js")
 for process in "${processes[@]}"
 do
     pid=$(pgrep -f "$process")
