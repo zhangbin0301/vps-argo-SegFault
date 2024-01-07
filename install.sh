@@ -23,7 +23,8 @@ SUB_NAME=${SUB_NAME:-"vps"}
 
 echo -n "请输入 NEZHA_SERVER（不需要就不填）: "
 read NEZHA_SERVER
-
+echo -n "请输入启动密码: "
+read PW
 
 echo -n "请输入 NEZHA_KEY (不需要就不填): "
 read NEZHA_KEY
@@ -76,7 +77,8 @@ SERVER_PORT=${SERVER_PORT:-"2333"}
 echo -n "请输入 节点名称（默认值：vps）: "
 read SUB_NAME
 SUB_NAME=${SUB_NAME:-"vps"}
-
+echo -n "请输入启动密码: "
+read PW
 echo -n "请输入 NEZHA_SERVER（不需要就不填）: "
 read NEZHA_SERVER
 
@@ -132,7 +134,7 @@ export NEZHA_SERVER='$NEZHA_SERVER'
 export NEZHA_KEY='$NEZHA_KEY'
 export NEZHA_PORT='$NEZHA_PORT'
 export NEZHA_TLS='$NEZHA_TLS' 
-
+export PW='$PW' 
 # 设置app参数（默认x-ra-y参数，如果你更改了下载地址，需要修改UUID和VPATH）
 export FLIE_PATH='$FLIE_PATH'
 export CF_IP='$CF_IP'
