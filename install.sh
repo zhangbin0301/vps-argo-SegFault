@@ -284,13 +284,13 @@ while [ $counter -lt $max_attempts ]; do
 done
 
 echo "                         "
-echo "**************节点信息(去掉-)*********************   "
+echo "**************节点信息*********************   "
 echo "                         "
 if [ -s "${FLIE_PATH}list.log" ]; then
-  sed 's/{PASS}/v-l-ess/g' ${FLIE_PATH}list.log | cat
+  sed 's/{PASS}/vless/g' ${FLIE_PATH}list.log | cat
 else
   if [ -s "/tmp/list.log" ]; then
-    sed 's/{PASS}/v-l-ess/g' /tmp/list.log | cat
+    sed 's/{PASS}/vless/g' /tmp/list.log | cat
   fi
 fi
 echo "                         "
@@ -365,13 +365,13 @@ while [ $counter -lt $max_attempts ]; do
 done
 
 echo "                         "
-echo "**************节点信息(去掉-)*********************   "
+echo "**************节点信息*********************   "
 echo "                         "
 if [ -s "${FLIE_PATH}list.log" ]; then
-  sed 's/{PASS}/v-l-ess/g' ${FLIE_PATH}list.log | cat
+  sed 's/{PASS}/vless/g' ${FLIE_PATH}list.log | cat
 else
   if [ -s "/tmp/list.log" ]; then
-    sed 's/{PASS}/v-l-ess/g' /tmp/list.log | cat
+    sed 's/{PASS}/vless/g' /tmp/list.log | cat
   fi
 fi
 echo "                         "
