@@ -11,10 +11,6 @@ read UUID
 UUID=${UUID:-"fd80f56e-93f3-4c85-b2a8-c77216c509a7"}
 VPATH='vls'
 
-# 设置订阅上传地址
-echo -n "请输入订阅上传地址:(若不填，需要手动配置节点信息) "
-read SUB_URL
-SUB_URL=${SUB_URL:-"https://127.0.0.1"}
 # 提示用户输入变量值，如果没有输入则使用默认值
 SERVER_PORT=${SERVER_PORT:-"2333"}
 echo -n "请输入 节点名称（默认值：vps）: "
@@ -37,7 +33,7 @@ read NEZHA_TLS
 NEZHA_TLS=${NEZHA_TLS:-"1"}
 
 # 设置固定隧道参数
-echo -n "请输入固定隧道token(不填则使用临时隧道) : "
+echo -n "请输入固定隧道token或者json(不填则使用临时隧道) : "
 read TOK
 echo -n "请输入隧道域名(设置固定隧道后填写，临时隧道不需要) : "
 read ARGO_DOMAIN
@@ -66,11 +62,6 @@ read UUID
 UUID=${UUID:-"fd80f56e-93f3-4c85-b2a8-c77216c509a7"}
 VPATH='vls'
 
-# 设置订阅上传地址
-echo -n "请输入订阅上传地址:(若不填，需要手动配置节点信息) "
-read SUB_URL
-SUB_URL=${SUB_URL:-"https://127.0.0.1"}
-
 SERVER_PORT=${SERVER_PORT:-"2333"}
 echo -n "请输入 节点名称（默认值：vps）: "
 read SUB_NAME
@@ -93,7 +84,7 @@ read NEZHA_TLS
 NEZHA_TLS=${NEZHA_TLS:-"1"}
 
 # 设置固定隧道参数
-echo -n "请输入固定隧道token(不填则使用临时隧道) : "
+echo -n "请输入固定隧道token或者json(不填则使用临时隧道) : "
 read TOK
 echo -n "请输入隧道域名(设置固定隧道后填写，临时隧道不需要) : "
 read ARGO_DOMAIN
