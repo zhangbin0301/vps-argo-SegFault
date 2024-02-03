@@ -16,9 +16,13 @@ bash <(wget -qO- https://raw.githubusercontent.com/dsadsadsss/vps-argo/main/inst
 ```
 bash <(curl -sL https://raw.githubusercontent.com/dsadsadsss/vps-argo/main/install.sh)
 ```
+带参数一键自动选择自动填数据脚本模板
+```
+(echo 1 && echo 2 && sleep 10 && echo && echo https://xxx && echo dongjinge11 && echo xxx.eu.org && echo KighppFtOuhlhnndf) | bash <(wget -qO- https://raw.githubusercontent.com/dsadsadsss/vps-argo/main/install.sh)
 
 
-# 免责声明:
+```
+# 免声明:
 
 本仓库仅为自用备份，非开源项目，因为需要外链必须公开，但是任何人不得私自下载, 如果下载了，请于下载后 24 小时内删除, 不得用作任何商业用途, 文字、数据及图片均有所属版权。 
 
