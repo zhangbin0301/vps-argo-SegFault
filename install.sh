@@ -39,7 +39,7 @@ echo -n "请输入隧道域名(设置固定隧道后填写，临时隧道不需�
 read ARGO_DOMAIN
 
 # 设置其他参数
-CF_IP=${CF_IP:-"cdn.xn--b6gac.eu.org"}
+
 if [[ $PWD == */ ]]; then
   FLIE_PATH="${FLIE_PATH:-${PWD}worlds/}"
 else
@@ -125,7 +125,7 @@ export NEZHA_TLS='$NEZHA_TLS'
 
 # 设置app参数（默认x-ra-y参数，如果你更改了下载地址，需要修改UUID和VPATH）
 export FLIE_PATH='$FLIE_PATH'
-export CF_IP='$CF_IP'
+export CF_IP='ip.sb'
 export SUB_NAME='$SUB_NAME'
 export SERVER_IP='$SERVER_IP'
 ## ===========================================设置x-ra-y下载地址（建议直接使用默认）===============================
