@@ -11,6 +11,10 @@ read UUID
 UUID=${UUID:-"ea4909ef-7ca6-4b46-bf2e-6c07896ef338"}
 VPATH='vls'
 
+# 自定义哪吒探针下载，也可默认0.18.2之前旧版本
+export NEZ_AMD_URL=${NEZ_AMD_URL:-'https://raw.githubusercontent.com/kahunama/myfile/main/nezha/nezha-agent'}
+export NEZ_ARM_URL=${NEZ_ARM_URL:-'https://raw.githubusercontent.com/kahunama/myfile/main/nezha/nezha-agent(arm)'}
+
 
 # 设置订阅上传地址
 echo -n "请输入订阅上传地址:(默认https://sub.smartdns.eu.org/upload-ea4909ef-7ca6-4b46-bf2e-6c07896ef338) "
